@@ -1,6 +1,6 @@
 <?php
 include_once '../connection/common.php';
-hello
+
 $pro=isset($_GET["pro"])?$_GET["pro"]:"";
 $pengguna=isset($_REQUEST["pengguna"])?$_REQUEST["pengguna"]:"";
 //$Passwd=isset($_REQUEST["katalaluan"])?$_REQUEST["katalaluan"]:"";
