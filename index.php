@@ -19,7 +19,4 @@ if(empty($_SESSION['SESS_UID'])){
 	include 'index_pages.php';
 	include 'index_footer.php';
 }
-
-
-
 ?>
