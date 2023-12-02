@@ -12,6 +12,8 @@
       <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
       <link id="pagestyle" href="assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
+      <script src="assets/js/core/popper.min.js"></script>
+      <script src="assets/js/core/bootstrap.min.js"></script>
    </head>
    <body class="g-sidenav-show  bg-gray-200">
       <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
