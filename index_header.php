@@ -26,84 +26,51 @@
                         </ol>
                         <h6 class="font-weight-bolder mb-0">Sales</h6>
                     </nav>
-                    <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
-                        <a href="javascript:;" class="nav-link text-body p-0">
-                            <div class="sidenav-toggler-inner">
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                                <i class="sidenav-toggler-line"></i>
-                            </div>
-                        </a>
-                    </div>
                     <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                            <div class="input-group input-group-outline">
-                                <label class="form-label">Search here</label>
-                                <input type="text" class="form-control">
-                            </div>
                         </div>
-                        <ul class="navbar-nav  justify-content-end">
-                            <li class="nav-item">
-                                <a href="../../pages/authentication/signin/illustration.html" class="nav-link text-body p-0 position-relative" target="_blank">
-                                <i class="material-icons me-sm-1">
-                                account_circle
-                                </i>
-                                </a>
-                            </li>
-                            <li class="nav-item px-3">
-                                <a href="javascript:;" class="nav-link text-body p-0">
-                                <i class="material-icons fixed-plugin-button-nav cursor-pointer">
-                                settings
-                                </i>
-                                </a>
-                            </li>
+                        <ul class="navbar-nav justify-content-end">
                             <li class="nav-item dropdown pe-2">
                                 <a href="javascript:;" class="nav-link text-body p-0 position-relative" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="material-icons cursor-pointer">
-                                notifications
-                                </i>
-                                <span class="position-absolute top-5 start-100 translate-middle badge rounded-pill bg-danger border border-white small py-1 px-2">
-                                <span class="small">11</span>
-                                <span class="visually-hidden">unread notifications</span>
-                                </span>
+                                    <i class="material-icons me-sm-1"> account_circle </i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end p-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex align-items-center py-1">
-                                            <span class="material-icons">email</span>
-                                            <div class="ms-2">
-                                            <h6 class="text-sm font-weight-normal my-auto">
-                                                Check new messages
-                                            </h6>
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex align-items-center py-1">
+                                                <span class="material-icons">manage_accounts</span>
+                                                <div class="ms-2">
+                                                <h6 class="text-sm font-weight-normal my-auto">
+                                                    Manage Profile
+                                                </h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li class="mb-2">
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex align-items-center py-1">
-                                            <span class="material-icons">podcasts</span>
-                                            <div class="ms-2">
-                                            <h6 class="text-sm font-weight-normal my-auto">
-                                                Manage podcast session
-                                            </h6>
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex align-items-center py-1">
+                                                <span class="material-icons">key</span>
+                                                <div class="ms-2">
+                                                    <h6 class="text-sm font-weight-normal my-auto">
+                                                        Change Password
+                                                    </h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item border-radius-md" href="javascript:;">
-                                        <div class="d-flex align-items-center py-1">
-                                            <span class="material-icons">shopping_cart</span>
-                                            <div class="ms-2">
-                                            <h6 class="text-sm font-weight-normal my-auto">
-                                                Payment successfully completed
-                                            </h6>
+                                        </a>
+                                    </li>
+                                    <li class="mb-2">
+                                        <a class="dropdown-item border-radius-md" href="javascript:;">
+                                            <div class="d-flex align-items-center py-1">
+                                                <span class="material-icons">logout</span>
+                                                <div class="ms-2">
+                                                <h6 class="text-sm font-weight-normal my-auto">
+                                                    Logout
+                                                </h6>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </a>
-                                </li>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
