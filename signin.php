@@ -39,7 +39,7 @@
                                         <input type="password" class="form-control">
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2">Sign in</button>
+                                        <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2" onclick="do_login()">Sign in</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
                                         Don't have an account?
@@ -64,9 +64,22 @@
             </footer>
         </div>
     </main>
+
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/sweetalert.min.js"></script>
+
+    <script>
+    function do_login(){
+        Swal.fire({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success"
+        });
+    }
+    </script>
+
     <script src="assets/js/material-dashboard.min.js?v=3.0.6"></script>
 </body>
 </html>
