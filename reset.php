@@ -25,25 +25,17 @@
                         <div class="card z-index-0">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-2">Sign Up</h4>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-2">Reset Password</h4>
                                 </div>
                             </div>
                             <div class="card-body pb-3">
-                                <form role="form">
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">First Name</label>
-                                        <input class="form-control" type="text" />
-                                    </div>
+                                <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Email</label>
                                         <input type="email" class="form-control">
                                     </div>
-                                    <div class="input-group input-group-outline my-3">
-                                        <label class="form-label">Password</label>
-                                        <input type="password" class="form-control">
-                                    </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Sign up</button>
+                                        <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Send</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
                                         Already have an account?

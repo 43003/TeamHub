@@ -1,28 +1,21 @@
 <?php
-include_once '../connection/common.php';
+include_once 'connection/common.php';
 
 $pro=isset($_GET["pro"])?$_GET["pro"]:"";
-$pengguna=isset($_REQUEST["pengguna"])?$_REQUEST["pengguna"]:"";
-//$Passwd=isset($_REQUEST["katalaluan"])?$_REQUEST["katalaluan"]:"";
-$katamasuk=isset($_REQUEST["katamasuk"])?$_REQUEST["katamasuk"]:"";
+$email=isset($_REQUEST["email"])?$_REQUEST["email"]:"";
+$password=isset($_REQUEST["password"])?$_REQUEST["password"]:"";
 $token=isset($_REQUEST["token"])?$_REQUEST["token"]:"";
-//$_SESSION['SESS_LOG']="LOG";
-//$pwd = encode5t($Passwd);
-//session_start();	
-//$pengguna='1234567890';
-//$katamasuk='1234567890';
-$pass = md5($katamasuk);
-//$pwd = $katamasuk;
-$tarikh = date("Y-m-d H:i:s");
-//print $pengguna." / ".$pro;
 
-//$sql = "SELECT * FROM _tbl_users WHERE isdeleted=0 AND username=".tosql($UserID)." AND passwords=".tosql($pwd);
-//if($_SESSION['token']==$token){
+$pass = md5($password);
 
 // $conn->debug=true;
 
-if($pro=='SAVE'){
-	$sql = "SELECT * FROM tbluser WHERE is_deleted=0 AND fldactive_ID=1 AND fldusername=".tosql($pengguna);
+if($pro=='LOGIN'){
+	if(str_contains($email,'@student')) {
+		$sql = "SELECT * FROM tbluser WHERE is_deleted=0 AND fldactive_ID=1 AND fldusername=".tosql($email);
+	} else {
+		$sql = "SELECT * FROM tbluser WHERE is_deleted=0 AND fldactive_ID=1 AND fldusername=".tosql($email);
+	}
 	$rs = $conn->query($sql);
 	if($rs->recordcount()>=1){
 		$err = 'OK';
@@ -30,6 +23,14 @@ if($pro=='SAVE'){
 		$err='XADA';
 	}
 
+} else if($pro=='SIGNUP'){
+	$sql = "INSER INTO ";
+	$rs = $conn->query($sql);
+	if($rs->recordcount()>=1){
+		$err = 'OK';
+	} else {
+		$err='XADA';
+	}
 }
 
 header("Content-Type: text/json");

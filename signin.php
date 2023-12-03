@@ -14,6 +14,10 @@
     <script src="assets/js/42d5adcbca.js"></script>
     <link href="assets/css/icon.css?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
+
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/core/jquery.min.js"></script>
 </head>
 <body class="bg-gray-200">
     <main class="main-content mt-0">
@@ -25,25 +29,30 @@
                         <div class="card z-index-0">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-2">Sign in</h4>
+                                    <h4 class="text-white font-weight-bolder text-center mt-2 mb-2">Sign In</h4>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form role="form" class="text-start">
-                                    <div class="input-group input-group-static my-3">
-                                        <label>Email</label>
-                                        <input type="email" class="form-control">
+                                <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
-                                    <div class="input-group input-group-static mb-3">
-                                        <label>Password</label>
-                                        <input type="password" class="form-control">
+                                    <div class="input-group input-group-outline my-3">
+                                        <label class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password">
+                                    </div>
+                                    <div class="form-check form-check-info text-end ps-0">
+                                        <input class="form-check-input" type="checkbox" id="showPassword" onclick="do_password()">
+                                        <label class="form-check-label" for="showPassword">
+                                            Show Password
+                                        </label>
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2" onclick="do_login()">Sign in</button>
+                                        <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2 btn-sign-in" onclick="do_login()">Sign in</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
-                                        Don't have an account?
-                                        <a href="signup.php" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                                        Forgot Password? <a href="reset.php" class="text-primary text-gradient font-weight-bold">Reset Password</a>
                                     </p>
                                 </form>
                             </div>
@@ -65,18 +74,63 @@
         </div>
     </main>
 
-    <script src="assets/js/core/popper.min.js"></script>
-    <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="assets/js/plugins/sweetalert.min.js"></script>
 
     <script>
+    function do_password() {
+        var showPassword = $('#showPassword').is(':checked');
+        var password = $("#password");
+        // alert(showPassword);
+        if(showPassword == true) {
+            password.attr("type", "text");
+        } else {
+            password.attr("type", "password");
+        }
+    }
     function do_login(){
-        Swal.fire({
-            title: "Good job!",
-            text: "You clicked the button!",
-            icon: "success"
-        });
+        var email = $('#email').val();
+        var password = $('#password').val();
+        
+        if (email.trim() == '' || password.trim() == '') {
+            Swal.fire({
+                title: "Warning!",
+                text: "Please fill the signin form!",
+                icon: "warning"
+            });
+        } else {
+            $.ajax({
+                url: 'system_sql.php?pro=LOGIN',
+                type: 'POST',
+                beforeSend: function () {
+                    $('.btn-sign-in').prop("disabled",true);
+                },
+                data: {email: email, password: password},
+                success: function(data) {
+                    if(data == 'OK') {
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "You clicked the button!",
+                            icon: "success"
+                        });
+                    } else if(data == 'XADA') {
+                        Swal.fire({
+                            title: "Warning!",
+                            text: "Your email or password is incorrect!",
+                            icon: "warning"
+                        });
+                        $('.btn-sign-in').prop("disabled",false);
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "There is an error in the server side!",
+                            icon: "error"
+                        });
+                        $('.btn-sign-in').prop("disabled",false);
+                    }
+                }
+            });
+        }
     }
     </script>
 

@@ -10,7 +10,7 @@ if($ip=='localhost'){
 
 	$username="root"; //------------your username usually root
 	$password="";//---------your password
-	$database="ecert";//----the name of the database
+	$database="teamhub";//----the name of the database
 	$DB_hostname='localhost';
 
 } else {
