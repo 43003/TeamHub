@@ -14,6 +14,9 @@
     <script src="assets/js/42d5adcbca.js"></script>
     <link href="assets/css/icon.css?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
+
+    <script src="assets/js/core/popper.min.js"></script>
+    <script src="assets/js/core/bootstrap.min.js"></script>
 </head>
 <body class="bg-gray-200">
     <main class="main-content mt-0">
@@ -32,10 +35,10 @@
                                 <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control">
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                     <div class="text-center">
-                                        <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Send</button>
+                                        <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0" onclick="do_send()">Send</button>
                                     </div>
                                     <p class="mt-4 text-sm text-center">
                                         Already have an account?
@@ -61,9 +64,55 @@
         </div>
     </main>
 
-    <script src="assets/js/core/popper.min.js"></script>
-    <script src="assets/js/core/bootstrap.min.js"></script>
     <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/plugins/sweetalert.min.js"></script>
+
+    <script>
+    function do_send(){
+        var email = $('#email').val();
+        var password = $('#password').val();
+        
+        if (email.trim() == '' || password.trim() == '') {
+            Swal.fire({
+                title: "Warning!",
+                text: "Please fill the signin form!",
+                icon: "warning"
+            });
+        } else {
+            $.ajax({
+                url: 'system_sql.php?pro=LOGIN',
+                type: 'POST',
+                beforeSend: function () {
+                    $('.btn-sign-in').prop("disabled",true);
+                },
+                data: {email: email, password: password},
+                success: function(data) {
+                    if(data == 'OK') {
+                        Swal.fire({
+                            title: "Good job!",
+                            text: "You clicked the button!",
+                            icon: "success"
+                        });
+                    } else if(data == 'XADA') {
+                        Swal.fire({
+                            title: "Warning!",
+                            text: "Your email or password is incorrect!",
+                            icon: "warning"
+                        });
+                        $('.btn-sign-in').prop("disabled",false);
+                    } else {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "There is an error in the server side!",
+                            icon: "error"
+                        });
+                        $('.btn-sign-in').prop("disabled",false);
+                    }
+                }
+            });
+        }
+    }
+    </script>
 
     <script src="assets/js/material-dashboard.min.js?v=3.0.6"></script>
 </body>
