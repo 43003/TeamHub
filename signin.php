@@ -36,11 +36,11 @@
                                 <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email">
+                                        <input type="email" class="form-control" id="email" name="email" value="">
                                     </div>
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password">
+                                        <input type="password" class="form-control" id="password" name="password" value="">
                                     </div>
                                     <div class="form-check form-check-info text-end ps-0">
                                         <input class="form-check-input" type="checkbox" id="showPassword" onclick="do_password()">
@@ -112,6 +112,8 @@
                             title: "Good job!",
                             text: "You clicked the button!",
                             icon: "success"
+                        }).then(function(){
+                            window.location.href="index.php";
                         });
                     } else if(data == 'XADA') {
                         Swal.fire({

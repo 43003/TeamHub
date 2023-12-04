@@ -1,173 +1,94 @@
-
+        <?php
+        if ($_SESSION['SESS_TYPE']=='P') {
+            $dir='student';
+        } else if($_SESSION['SESS_TYPE']=='S'){
+            $dir='lecturer';
+        }
+        if(empty($pages)){ $pages = $dir.'/dashboard/index.php'; }
+        // print $pages;
+        ?>
         <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
             <div class="sidenav-header">
                 <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-                <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/material-dashboard-pro/pages/dashboards/analytics.html " target="_blank">
+                <a class="navbar-brand m-0" href="index.php">
                     <img src="assets/img/logo-ct.png" class="navbar-brand-img h-100" alt="main_logo">
-                    <span class="ms-1 font-weight-bold text-white">Material Dashboard 2 PRO</span>
+                    <span class="ms-1 font-weight-bold text-white">TeamHub</span>
                 </a>
             </div>
             <hr class="horizontal light mt-0 mb-2">
             <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
-                <ul class="navbar-nav">
-                    <li class="nav-item mb-2 mt-0">
-                        <a data-bs-toggle="collapse" href="#ProfileNav" class="nav-link text-white" aria-controls="ProfileNav" role="button" aria-expanded="false">
-                            <img src="assets/img/team-3.jpg" class="avatar">
-                            <span class="nav-link-text ms-2 ps-1">Brooklyn Alice</span>
-                        </a>
-                        <div class="collapse" id="ProfileNav" style>
-                            <ul class="nav ">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="pages/pages/profile/overview.html">
-                                        <span class="sidenav-mini-icon"> MP </span>
-                                        <span class="sidenav-normal ms-3 ps-1"> Manage Profile </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white " href="pages/pages/account/settings.html">
-                                        <span class="sidenav-mini-icon"> CP </span>
-                                        <span class="sidenav-normal ms-3 ps-1"> Change Password </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white " href="pages/authentication/signin/basic.html">
-                                        <span class="sidenav-mini-icon"> L </span>
-                                        <span class="sidenav-normal ms-3 ps-1"> Logout </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <hr class="horizontal light mt-0">                    
+                <ul class="navbar-nav">               
                     <li class="nav-item">
-                        <a class="nav-link active" href="https://github.com/creativetimofficial/ct-material-dashboard-pro/blob/master/CHANGELOG.md" target="_blank">
+                        <a class="nav-link <?php if($pages==$dir.'/dashboard/index.php'){ print 'active';}?>" href="index.php">
                             <i class="material-icons-round">dashboard</i>
                             <span class="nav-link-text ms-2 ps-1">Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder text-white">COURSE</h6>
+                    </li>
                     <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#dashboardsExamples" class="nav-link text-white" aria-controls="dashboardsExamples" role="button" aria-expanded="false">
-                            <i class="material-icons-round opacity-10">dashboard</i>
-                            <span class="nav-link-text ms-2 ps-1">Dashboards</span>
+                        <a class="nav-link <?php if($pages==$dir.'/course/index.php'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/course/index.php;;Courses;;;;'); ?>">
+                            <i class="material-icons-round">bookmark</i>
+                            <span class="nav-link-text ms-2 ps-1">Courses</span>
                         </a>
-                        <div class="collapse" id="dashboardsExamples">
-                            <ul class="nav">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white " href="pages/dashboards/analytics.html">
-                                        <span class="sidenav-mini-icon"> A </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Analytics </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white " href="pages/dashboards/discover.html">
-                                        <span class="sidenav-mini-icon"> D </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Discover </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" href="pages/dashboards/sales.html">
-                                        <span class="sidenav-mini-icon"> S </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Sales </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-white " href="pages/dashboards/automotive.html">
-                                        <span class="sidenav-mini-icon"> A </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Automotive </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                        <a class="nav-link text-white " href="pages/dashboards/smart-home.html">
-                                        <span class="sidenav-mini-icon"> S </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Smart Home </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if($pages==$dir.'/assessment/index.php'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;;Assessments;;;;'); ?>">
+                            <i class="material-icons-round">analytics</i>
+                            <span class="nav-link-text ms-2 ps-1">Assessments</span>
+                        </a>
                     </li>
                     <li class="nav-item mt-3">
-                        <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">PAGES</h6>
+                        <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">STUDENT</h6>
                     </li>
                     <li class="nav-item">
-                        <a data-bs-toggle="collapse" href="#ecommerceExamples" class="nav-link text-white " aria-controls="ecommerceExamples" role="button" aria-expanded="false">
-                        <i class="material-icons-round">shopping_basket</i>
-                        <span class="nav-link-text ms-2 ps-1">Ecommerce</span>
+                        <a class="nav-link <?php if($pages==$dir.'/student/index.php'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/student/index.php;;Students;;;;'); ?>">
+                            <i class="material-icons-round">badge</i>
+                            <span class="nav-link-text ms-2 ps-1">Students</span>
                         </a>
-                        <div class="collapse " id="ecommerceExamples">
-                            <ul class="nav ">
-                                <li class="nav-item ">
-                                    <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false" href="#productsExample">
-                                        <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Products <b class="caret"></b></span>
-                                    </a>
-                                    <div class="collapse " id="productsExample">
-                                        <ul class="nav nav-sm flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link text-white " href="pages/ecommerce/products/new-product.html">
-                                                    <span class="sidenav-mini-icon"> N </span>
-                                                    <span class="sidenav-normal ms-2 ps-1"> New Product </span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-white " href="pages/ecommerce/products/edit-product.html">
-                                                    <span class="sidenav-mini-icon"> E </span>
-                                                    <span class="sidenav-normal ms-2 ps-1"> Edit Product </span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-white " href="pages/ecommerce/products/product-page.html">
-                                                    <span class="sidenav-mini-icon"> P </span>
-                                                    <span class="sidenav-normal ms-2 ps-1"> Product Page </span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-white " href="pages/ecommerce/products/products-list.html">
-                                                    <span class="sidenav-mini-icon"> P </span>
-                                                    <span class="sidenav-normal ms-2 ps-1"> Products List </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link text-white " data-bs-toggle="collapse" aria-expanded="false" href="#ordersExample">
-                                        <span class="sidenav-mini-icon"> O </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Orders <b class="caret"></b></span>
-                                    </a>
-                                    <div class="collapse " id="ordersExample">
-                                        <ul class="nav nav-sm flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link text-white " href="pages/ecommerce/orders/list.html">
-                                                <span class="sidenav-mini-icon"> O </span>
-                                                <span class="sidenav-normal ms-2 ps-1"> Order List </span>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link text-white " href="pages/ecommerce/orders/details.html">
-                                                <span class="sidenav-mini-icon"> O </span>
-                                                <span class="sidenav-normal ms-2 ps-1"> Order Details </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <li class="nav-item ">
-                                    <a class="nav-link text-white " href="pages/ecommerce/referral.html">
-                                        <span class="sidenav-mini-icon"> R </span>
-                                        <span class="sidenav-normal ms-2 ps-1"> Referral </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if($pages==$dir.'/team/index.php'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/team/index.php;;Teams;;;;'); ?>">
+                            <i class="material-icons-round">groups</i>
+                            <span class="nav-link-text ms-2 ps-1">Teams</span>
+                        </a>
+                    </li>
+                    <li class="nav-item mt-3">
+                        <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">REPORT</h6>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if($pages==$dir.'/report/index.php'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/report/index.php;;Reports;;;;'); ?>">
+                            <i class="material-icons-round">summarize</i>
+                            <span class="nav-link-text ms-2 ps-1">Reports</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <hr class="horizontal light" />
-                        <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">DOCS</h6>
+                        <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">SETTINGS</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/creativetimofficial/ct-material-dashboard-pro/blob/master/CHANGELOG.md" target="_blank">
-                            <i class="material-icons-round">receipt_long</i>
-                            <span class="nav-link-text ms-2 ps-1">Changelog</span>
+                        <a class="nav-link <?php if($pages==$dir.'/profile/index.php'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/profile/index.php;;Profile;;;;'); ?>">
+                            <i class="material-icons-round">manage_accounts</i>
+                            <span class="nav-link-text ms-2 ps-1">Manage Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">
+                            <i class="material-icons-round">key</i>
+                            <span class="nav-link-text ms-2 ps-1">Change Password</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">
+                            <i class="material-icons-round">logout</i>
+                            <span class="nav-link-text ms-2 ps-1">Logout</span>
                         </a>
                     </li>
                 </ul>
