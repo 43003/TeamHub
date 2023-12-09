@@ -12,8 +12,14 @@
           </footer>
       </div>
     </main>
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="myModalLg" tabindex="-1" role="dialog" aria-labelledby="myModalLg" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
         </div>
       </div>

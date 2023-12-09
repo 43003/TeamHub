@@ -10,7 +10,7 @@
 
         <script>
         function do_password(){
-            $('.modal .modal-content').load('change_password.php')
+            $('#myModal .modal-content').load('change_password.php')
         }
         </script>
 

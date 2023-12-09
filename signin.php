@@ -11,9 +11,11 @@
     <link rel="stylesheet" type="text/css" href="assets/css/font.css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
     <link href="assets/css/nucleo-icons.css" rel="stylesheet" />
     <link href="assets/css/nucleo-svg.css" rel="stylesheet" />
-    <script src="assets/js/42d5adcbca.js"></script>
+    
     <link href="assets/css/icon.css?family=Material+Icons+Round" rel="stylesheet">
     <link id="pagestyle" href="assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
+
+    <script src="assets/js/42d5adcbca.js"></script>
 
     <script src="assets/js/core/popper.min.js"></script>
     <script src="assets/js/core/bootstrap.min.js"></script>
@@ -33,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
+                                <form name="hub" id="form" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Email</label>
                                         <input type="email" class="form-control" id="email" name="email" value="">
@@ -110,7 +112,7 @@
                     if(data == 'OK') {
                         Swal.fire({
                             title: "Good job!",
-                            text: "You clicked the button!",
+                            text: "You have successfully log in!",
                             icon: "success"
                         }).then(function(){
                             window.location.href="index.php";
