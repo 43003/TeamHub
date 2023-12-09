@@ -7,6 +7,13 @@
         if(empty($pages)){ $pages = $dir.'/dashboard/index.php'; }
         // print $pages;
         ?>
+
+        <script>
+        function do_password(){
+            $('.modal .modal-content').load('change_password.php')
+        }
+        </script>
+
         <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
             <div class="sidenav-header">
                 <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
@@ -80,7 +87,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">
+                        <a class="nav-link" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModal" onclick="do_password()">
                             <i class="material-icons-round">key</i>
                             <span class="nav-link-text ms-2 ps-1">Change Password</span>
                         </a>

@@ -17,6 +17,7 @@
 
       <script src="assets/js/core/popper.min.js"></script>
       <script src="assets/js/core/bootstrap.min.js"></script>
+    <script src="assets/js/core/jquery.min.js"></script>
    </head>
    <body class="g-sidenav-show  bg-gray-200">
       <form name="hub" method="post" action="" enctype="multipart/form-data" autocomplete="off">
