@@ -1,4 +1,4 @@
-
+               <?php include 'connection/common.php'; ?>
                <div class="row">
                   <div class="col">
                      <div class="card h-100">                        
@@ -63,52 +63,69 @@
                         </div>
                         <div class="card-body pb-0 p-3 mt-4">
                            <div class="row">
-                              <div class="col-7 text-start">
+                              <div class="col text-start">
                                     <div class="chart">
-                                       <canvas id="chart-pie" class="chart-canvas" height="200"></canvas>
+                                       <canvas id="student_chart" class="chart-canvas" height="200"></canvas>
                                     </div>
                               </div>
-                              <div class="col-5 my-auto">
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                       <i class="bg-info"></i>
-                                       <span class="text-dark text-xs">Facebook</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                       <i class="bg-primary"></i>
-                                       <span class="text-dark text-xs">Direct</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                       <i class="bg-dark"></i>
-                                       <span class="text-dark text-xs">Organic</span>
-                                    </span>
-                                    <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                       <i class="bg-secondary"></i>
-                                       <span class="text-dark text-xs">Referral</span>
-                                    </span>
+                           </div>
+                           <div class="row d-flex align-items-center">
+                              <?php 
+                              $sqlC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
+                              $rsC = $conn->query($sqlC);
+                              $colours = ['primary', 'info', 'dark'];
+                              $bil=0;
+                              while(!$rsC->EOF){
+                              ?>
+                              <div class="col my-auto">
+                                 <span class="badge badge-md badge-dot me-4 d-block text-start">
+                                    <i class="bg-<?=$colours[$bil];?>"></i>
+                                    <span class="text-dark text-xs"><?=$rsC->fields['course_code']?></span>
+                                 </span>
                               </div>
+                              <?php
+                                 $bil++;
+                                 $rsC->movenext();
+                              }
+                              ?>
                            </div>
                         </div>
                         <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
                            <div class="w-100">
                               <div class="table-responsive">
-                                    <table class="table align-items-center ">
-                                       <tbody>
-                                          <tr>
-                                                <td class="w-30">
-                                                   <div class="ms-4">
-                                                      <p class="text-xs font-weight-bold mb-0 ">Course:</p>
-                                                      <h6 class="text-sm font-weight-normal mb-0 ">DITU 2231 - Projek Diploma</h6>
-                                                   </div>
-                                                </td>
-                                                <td>
-                                                   <div class="text-center">
-                                                      <p class="text-xs font-weight-bold mb-0 ">Total Students:</p>
-                                                      <h6 class="text-sm font-weight-normal mb-0 ">2500</h6>
-                                                   </div>
-                                                </td>
-                                          </tr>
-                                       </tbody>
-                                    </table>
+                                 <table class="table align-items-center">
+                                    <thead>
+                                       <tr>
+                                          <td class="w-30"><p class="text-xs font-weight-bold mb-0 ">Course</p></td>
+                                          <td class="w-60"><p class="text-xs text-center font-weight-bold mb-0 ">Total Students</p></td>
+                                       </tr>
+                                    </thead>
+                                    <tbody>
+                                       <?php 
+                                       $sqlCN = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
+                                       $rsCN = $conn->query($sqlCN);
+                                       $bil=0;
+                                       while(!$rsCN->EOF){
+                                          $sqlST = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsCN->fields['course_ID']);
+                                          $rsST = $conn->query($sqlST);
+                                       ?>
+                                       <tr>
+                                          <td>
+                                             <h6 class="text-sm font-weight-normal mb-0 "><?=$rsCN->fields['course_code']?> - <?=$rsCN->fields['course_name']?></h6>
+                                          </td>
+                                          <td class="w-30">
+                                             <div class="text-center">
+                                                <h6 class="text-sm font-weight-normal mb-0 "><?=$rsST->fields['total_student']?></h6>
+                                             </div>
+                                          </td>
+                                       </tr>
+                                       <?php
+                                          $bil++;
+                                          $rsCN->movenext();
+                                       }
+                                       ?>
+                                    </tbody>
+                                 </table>
                               </div>
                            </div>
                         </div>
@@ -136,161 +153,86 @@
                   </div>
                   <script src="assets/js/plugins/chartjs.min.js"></script>
                   <script>
-                  var ctx1 = document.getElementById("chart-line").getContext("2d");
-                  var ctx2 = document.getElementById("chart-pie").getContext("2d");
+                  var chart_student = document.getElementById("student_chart").getContext("2d");
                   
-                  // Line chart
-                  new Chart(ctx1, {
-                  type: "line",
-                  data: {
-                     labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                     datasets: [{
-                        label: "Facebook Ads",
-                        tension: 0,
-                        pointRadius: 5,
-                        pointBackgroundColor: "#e91e63",
-                        pointBorderColor: "transparent",
-                        borderColor: "#e91e63",
-                        borderWidth: 4,
-                        backgroundColor: "transparent",
-                        fill: true,
-                        data: [50, 100, 200, 190, 400, 350, 500, 450, 700],
-                        maxBarThickness: 6
-                     },
-                     {
-                           label: "Google Ads",
-                           tension: 0,
-                           borderWidth: 0,
-                           pointRadius: 5,
-                           pointBackgroundColor: "#3A416F",
-                           pointBorderColor: "transparent",
-                           borderColor: "#3A416F",
-                           borderWidth: 4,
-                           backgroundColor: "transparent",
-                           fill: true,
-                           data: [10, 30, 40, 120, 150, 220, 280, 250, 280],
-                           maxBarThickness: 6
+                  <?php                  
+                  $sqlDC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
+                  $rsDC = $conn->query($sqlDC);
+
+                  $data_course="";
+                  $data_student="";
+                  $bills=0;
+                  while (!$rsDC->EOF) {
+                     $sqlDS = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsC->fields['course_ID']);
+                     $rsDS = $conn->query($sqlDS);
+                     
+                     if($bills > 0){
+                        $data_course.=",".$rsDC->fields['course_code'];
+                        $data_student.=",".$rsDS->fields['total_student'];
+                     } else {
+                        $data_course.=$rsDC->fields['course_code'];
+                        $data_student.=$rsDS->fields['total_student'];
                      }
-                     ],
-                  },
-                  options: {
-                     responsive: true,
-                     maintainAspectRatio: false,
-                     plugins: {
-                     legend: {
-                           display: false,
-                     }
-                     },
-                     interaction: {
-                     intersect: false,
-                     mode: 'index',
-                     },
-                     scales: {
-                     y: {
-                           grid: {
-                           drawBorder: false,
-                           display: true,
-                           drawOnChartArea: true,
-                           drawTicks: false,
-                           borderDash: [5, 5],
-                           color: '#c1c4ce5c'
-                           },
-                           ticks: {
-                           display: true,
-                           padding: 10,
-                           color: '#9ca2b7',
-                           font: {
-                              size: 14,
-                              weight: 300,
-                              family: "Roboto",
-                              style: 'normal',
-                              lineHeight: 2
-                           },
-                           }
-                     },
-                     x: {
-                           grid: {
-                           drawBorder: false,
-                           display: true,
-                           drawOnChartArea: true,
-                           drawTicks: true,
-                           borderDash: [5, 5],
-                           color: '#c1c4ce5c'
-                           },
-                           ticks: {
-                           display: true,
-                           color: '#9ca2b7',
-                           padding: 10,
-                           font: {
-                              size: 14,
-                              weight: 300,
-                              family: "Roboto",
-                              style: 'normal',
-                              lineHeight: 2
-                           },
-                           }
-                     },
-                     },
-                  },
-                  });
-                    
-                    
+                     $bills++;
+                     $rsDC->movenext();
+                  }
+                  ?>
                   // Pie chart
-                  new Chart(ctx2, {
-                  type: "pie",
-                  data: {
-                     labels: ['Facebook', 'Direct', 'Organic', 'Referral'],
-                     datasets: [{
-                     label: "Projects",
-                     weight: 9,
-                     cutout: 0,
-                     tension: 0.9,
-                     pointRadius: 2,
-                     borderWidth: 1,
-                     backgroundColor: ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'],
-                     data: [15, 20, 12, 60],
-                     fill: false
-                     }],
-                  },
-                  options: {
-                     responsive: true,
-                     maintainAspectRatio: false,
-                     plugins: {
-                     legend: {
-                           display: false,
-                     }
+                  new Chart(chart_student, {
+                     type: "pie",
+                     data: {
+                        labels: ['<?=$data_course?>'],
+                        datasets: [{
+                           label: "Total Student by Course",
+                           weight: 9,
+                           cutout: 0,
+                           tension: 1,
+                           pointRadius: 23,
+                           borderWidth: 1,
+                           backgroundColor: ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'],
+                           data: ['<?=$data_student?>'],
+                           fill: false
+                        }],
                      },
-                     interaction: {
-                     intersect: false,
-                     mode: 'index',
-                     },
-                     scales: {
-                     y: {
-                           grid: {
-                           drawBorder: false,
-                           display: false,
-                           drawOnChartArea: false,
-                           drawTicks: false,
-                           color: '#c1c4ce5c'
-                           },
-                           ticks: {
-                           display: false
+                     options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                           legend: {
+                              display: false,
                            }
-                     },
-                     x: {
-                           grid: {
-                           drawBorder: false,
-                           display: false,
-                           drawOnChartArea: false,
-                           drawTicks: false,
-                           color: '#c1c4ce5c'
+                        },
+                        interaction: {
+                           intersect: false,
+                           mode: 'index',
+                        },
+                        scales: {
+                           y: {
+                                 grid: {
+                                    drawBorder: false,
+                                    display: false,
+                                    drawOnChartArea: false,
+                                    drawTicks: false,
+                                    color: '#c1c4ce5c'
+                                 },
+                                 ticks: {
+                                    display: false
+                                 }
                            },
-                           ticks: {
-                           display: false,
-                           }
+                           x: {
+                              grid: {
+                                 drawBorder: false,
+                                 display: false,
+                                 drawOnChartArea: false,
+                                 drawTicks: false,
+                                 color: '#c1c4ce5c'
+                              },
+                              ticks: {
+                                 display: false,
+                              }
+                           },
+                        },
                      },
-                     },
-                  },
                   });
                   </script>
                </div>
