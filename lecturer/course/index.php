@@ -1,10 +1,52 @@
         <script>
         function do_form(ids){
-          $('#myModalLg .modal-content').load('lecturer/course/form.php')
+          $('#myModalLg .modal-content').load('lecturer/course/form.php?ids='+ids)
+        }
+
+        function do_delete(ids){
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $.ajax({
+                url: 'lecturer/course/course_sql.php?pro=DEL',
+                type: 'POST',
+                beforeSend: function () {
+                  // $('.btn-submit').prop("disabled",true);
+                },
+                data: {ids:ids},
+                success: function(data) {
+                  if(data == 'OK') {
+                    Swal.fire({
+                      title: "Deleted!",
+                      text: "Your data has been deleted.",
+                      icon: "success"
+                    }).then(function(){
+                      window.location.reload();
+                    });
+                  } else {
+                    Swal.fire({
+                      title: "Error!",
+                      text: "There is an error in the server side!",
+                      icon: "error"
+                    });
+                    // $('.btn-sign-in').prop("disabled",false);
+                  }
+                }
+              });
+            }
+          });
         }
         </script>
 
         <?php
+        // $conn->debug=true;
         $sql="SELECT * FROM `course` WHERE `is_deleted`=0 AND `lecturer_ID`=".tosql($_SESSION['SESS_UID']);
         $rs=$conn->query($sql);
         ?>
@@ -45,8 +87,10 @@
                       <span class="mb-2">Status: <span class="badge badge-<?=$status;?>"><?=$status_txt?></span></span>
                     </div>
                     <div class="ms-auto text-end">
-                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">edit</i>Edit</a>
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
+                        <i class="material-icons text-sm me-2">edit</i>Edit
+                      </a>
+                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['course_ID']?>')"><i class="material-icons text-sm me-2">delete</i>Delete</a>
                     </div>
                   </li>
                   <?php

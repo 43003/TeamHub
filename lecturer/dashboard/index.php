@@ -1,13 +1,13 @@
 
                <div class="row">
-                  <div class="col-auto">
+                  <div class="col">
                      <div class="card h-100">                        
                         <div class="card-body">
                            <div class="row">
                               <div class="col-12 col-md-6 col-xl-3 position-relative">
                                  <div class="card card-plain">
                                     <div class="card-body mx-auto">
-                                       <img src="assets/img/team-3.png" alt="profile_image" height="300" width="300" class="border-radius-lg shadow-sm">
+                                       
                                     </div>
                                  </div>
                                  <hr class="vertical dark">
