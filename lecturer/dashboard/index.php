@@ -69,7 +69,7 @@
                                     </div>
                               </div>
                            </div>
-                           <div class="row d-flex align-items-center">
+                           <div class="row">
                               <?php 
                               $sqlC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
                               $rsC = $conn->query($sqlC);
