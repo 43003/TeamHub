@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/favicon.png">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/img/logo.png">
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
     
     <title>TeamHub</title>
     
@@ -23,7 +23,7 @@
 </head>
 <body class="bg-gray-200">
     <main class="main-content mt-0">
-        <div class="page-header align-items-start min-vh-100" style="background-image: url('assets/img/ftmk1.jpg');">
+        <div class="page-header align-items-start min-vh-100" style="background-image: url('assets/img/ftmk.jpg');">
             <span class="mask bg-gradient-dark opacity-6"></span>
             <div class="container my-auto">
                 <div class="row">
