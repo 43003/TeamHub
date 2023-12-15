@@ -87,10 +87,17 @@
                       <span class="mb-2">Status: <span class="badge badge-<?=$status;?>"><?=$status_txt?></span></span>
                     </div>
                     <div class="ms-auto text-end">
-                      <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
-                        <i class="material-icons text-sm me-2">edit</i>Edit
-                      </a>
-                      <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['course_ID']?>')"><i class="material-icons text-sm me-2">delete</i>Delete</a>
+                      <div class="row">
+                        <a class="btn btn-link text-dark px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;;Assessments;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
+                          <i class="material-icons text-sm me-2">add</i>Add Assessment
+                        </a>
+                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
+                          <i class="material-icons text-sm me-2">edit</i>Edit Course
+                        </a>
+                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['course_ID']?>')">
+                          <i class="material-icons text-sm me-2">delete</i>Delete Course
+                        </a>
+                      </div>
                     </div>
                   </li>
                   <?php

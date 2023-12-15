@@ -23,6 +23,7 @@
 
       <script src="assets/js/plugins/choices.min.js"></script>
       <script src="assets/js/plugins/quill.min.js"></script>
+      <script src="assets/js/plugins/flatpickr.min.js"></script>
       <script src="assets/js/plugins/sweetalert.min.js"></script>
    </head>
    <body class="g-sidenav-show bg-gray-200">

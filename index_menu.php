@@ -35,19 +35,19 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder text-white">COURSE</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/course/index.php'){ print 'active'; }?>" 
+                        <a class="nav-link <?php if($pages==$dir.'/course/index.php' || $pages==$dir.'/assessment/index.php'){ print 'active'; }?>" 
                             href="index.php?data=<?php print base64_encode($dir.'/course/index.php;;Courses;;;;'); ?>">
                             <i class="material-icons-round">bookmark</i>
                             <span class="nav-link-text ms-2 ps-1">Courses</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link <?php if($pages==$dir.'/assessment/index.php'){ print 'active'; }?>" 
                             href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;;Assessments;;;;'); ?>">
                             <i class="material-icons-round">analytics</i>
                             <span class="nav-link-text ms-2 ps-1">Assessments</span>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item mt-3">
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">STUDENT</h6>
                     </li>
