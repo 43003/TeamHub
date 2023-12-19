@@ -46,13 +46,19 @@ if($pro=='LOGIN'){
 		$err='XADA';
 	}
 
-} else if($pro=='SIGNUP'){
-	$sql = "INSER INTO ";
-	$rs = $conn->query($sql);
-	if($rs->recordcount()>=1){
+} else if($pro=='CHANGE'){
+	try {
+		if ($_SESSION['SESS_TYPE'] == "P") {
+			$sql = "UPDATE `student` SET `password`=".tosql($pass)." WHERE student_ID=".tosql($_SESSION['SESS_UID']);
+		} else if ($_SESSION['SESS_TYPE'] == "S") {
+			$sql = "UPDATE `lecturer` SET `password`=".tosql($pass)." WHERE lecturer_ID=".tosql($_SESSION['SESS_UID']);
+		}
+		// $conn->debug=true;
+		$conn->query($sql);
 		$err = 'OK';
-	} else {
-		$err='XADA';
+	} catch (\Throwable $th) {
+		//throw $th;
+		$err = 'ERR';
 	}
 }
 

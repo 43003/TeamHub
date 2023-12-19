@@ -59,7 +59,7 @@
                     <h6 class="mb-0">List of Courses</h6>
                   </div>
                   <div class="col-6 text-end">
-                    <a class="btn bg-gradient-dark mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('')">
+                    <a class="btn bg-gradient-info mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('')">
                       <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Course
                     </a>
                   </div>
@@ -88,12 +88,16 @@
                     </div>
                     <div class="ms-auto text-end">
                       <div class="row">
-                        <a class="btn btn-link text-dark px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;;Assessments;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
+                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;Course;Assessments List;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
                           <i class="material-icons text-sm me-2">add</i>Add Assessment
                         </a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
+                      </div>
+                      <div class="row">
+                        <a class="btn btn-link text-info px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
                           <i class="material-icons text-sm me-2">edit</i>Edit Course
                         </a>
+                      </div>
+                      <div class="row">
                         <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['course_ID']?>')">
                           <i class="material-icons text-sm me-2">delete</i>Delete Course
                         </a>

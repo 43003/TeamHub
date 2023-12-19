@@ -120,14 +120,14 @@
                     } else if(data == 'XADA') {
                         Swal.fire({
                             title: "Warning!",
-                            text: "Your email or password is incorrect!",
+                            text: "Your email is not registered to the system",
                             icon: "warning"
                         });
                         $('.btn-sign-in').prop("disabled",false);
                     } else {
                         Swal.fire({
                             title: "Error!",
-                            text: "There is an error in the server side!",
+                            text: "Your password is incorrect!",
                             icon: "error"
                         });
                         $('.btn-sign-in').prop("disabled",false);

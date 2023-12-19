@@ -26,8 +26,10 @@
                             <?php
                             if (empty($menu)) { $disp_menu = "Dashboard"; } 
                             else { $disp_menu = $menu; }
+                            if (empty($module)) { $disp_module = "Dashboard"; }
+                            else { $disp_module = $module; }
                             ?>
-                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?=$disp_menu; ?></li>
+                            <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?=$disp_module; ?></li>
                         </ol>
                         <h6 class="font-weight-bolder mb-0"><?=$disp_menu; ?></h6>
                     </nav>
@@ -40,7 +42,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end p-2 me-sm-n4" aria-labelledby="dropdownMenuButton">
                                     <li class="mb-2">
-                                        <a class="dropdown-item border-radius-md" href="index.php?data=<?php print base64_encode($dir.'/profile/index.php;;Profile;;;;'); ?>">
+                                        <a class="dropdown-item border-radius-md" href="index.php?data=<?php print base64_encode($dir.'/profile/index.php;Profile;Manage Profile;;;;'); ?>">
                                             <div class="d-flex align-items-center py-1">
                                                 <span class="material-icons">manage_accounts</span>
                                                 <div class="ms-2">

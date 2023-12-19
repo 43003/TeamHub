@@ -5,12 +5,12 @@
             $dir='lecturer';
         }
         if(empty($pages)){ $pages = $dir.'/dashboard/index.php'; }
-        // print $pages;
+        // print $module;
         ?>
 
         <script>
         function do_password(){
-            $('#myModal .modal-content').load('change_password.php')
+            $('#myModalLg .modal-content').load('change_password.php')
         }
         </script>
 
@@ -26,7 +26,7 @@
             <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
                 <ul class="navbar-nav">               
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/dashboard/index.php'){ print 'active';}?>" href="index.php">
+                        <a class="nav-link <?php if($module==''){ print 'active';}?>" href="index.php">
                             <i class="material-icons-round">dashboard</i>
                             <span class="nav-link-text ms-2 ps-1">Dashboard</span>
                         </a>
@@ -35,32 +35,25 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder text-white">COURSE</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/course/index.php' || $pages==$dir.'/assessment/index.php'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/course/index.php;;Courses;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Course'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/course/index.php;Course;Courses List;;;;'); ?>">
                             <i class="material-icons-round">bookmark</i>
                             <span class="nav-link-text ms-2 ps-1">Courses</span>
                         </a>
                     </li>
-                    <!-- <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/assessment/index.php'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;;Assessments;;;;'); ?>">
-                            <i class="material-icons-round">analytics</i>
-                            <span class="nav-link-text ms-2 ps-1">Assessments</span>
-                        </a>
-                    </li> -->
                     <li class="nav-item mt-3">
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">STUDENT</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/student/index.php'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/student/index.php;;Students;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Student'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/student/index.php;Student;Students List;;;;'); ?>">
                             <i class="material-icons-round">badge</i>
                             <span class="nav-link-text ms-2 ps-1">Students</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/team/index.php'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/team/index.php;;Teams;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Team'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/team/index.php;Team;Generate Teams;;;;'); ?>">
                             <i class="material-icons-round">groups</i>
                             <span class="nav-link-text ms-2 ps-1">Teams</span>
                         </a>
@@ -80,14 +73,14 @@
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">SETTINGS</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/profile/index.php'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/profile/index.php;;Profile;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Profile'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/profile/index.php;Profile;Manage Profile;;;;'); ?>">
                             <i class="material-icons-round">manage_accounts</i>
                             <span class="nav-link-text ms-2 ps-1">Manage Profile</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModal" onclick="do_password()">
+                        <a class="nav-link" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_password()">
                             <i class="material-icons-round">key</i>
                             <span class="nav-link-text ms-2 ps-1">Change Password</span>
                         </a>
