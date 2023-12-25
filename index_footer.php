@@ -25,8 +25,6 @@
       </div>
     </div>
   </form>
-  <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script>
       var win = navigator.platform.indexOf('Win') > -1;
       if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -39,15 +37,15 @@
   <script src="assets/js/material-dashboard.min.js?v=3.0.6"></script>
   
   <?php 
-  //$conn->debug=true;
-  $rs = $conn->query("SELECT * FROM information_schema.`processlist` WHERE TIME>=300");
-  while(!$rs->EOF){
-    $process_id=$rs->fields['ID'];
-    print "<br>".$rs->fields['ID'].":".$rs->fields['TIME'];
-    $conn->execute("KILL $process_id");
-    $rs->movenext();
-  }
-  $conn->close(); 
+  // $conn->debug=true;
+  // $rs = $conn->query("SELECT * FROM information_schema.`processlist` WHERE TIME>=300");
+  // while(!$rs->EOF){
+  //   $process_id=$rs->fields['ID'];
+  //   print "<br>".$rs->fields['ID'].":".$rs->fields['TIME'];
+  //   $conn->execute("KILL $process_id");
+  //   $rs->movenext();
+  // }
+  // $conn->close(); 
   ?>   
 </body>
 </html>
