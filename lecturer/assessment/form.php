@@ -107,7 +107,7 @@
           </div>
           <div class="col-md-10">
             <div class="input-group input-group-outline my-3">
-              <input id="assessment_title" name="assessment_title" type="text" class="form-control" value="<?=$course_code;?>" onkeyup="upperCase(this)">
+              <input id="assessment_title" name="assessment_title" type="text" class="form-control" value="" onkeyup="upperCase(this)">
             </div>
           </div>
         </div>

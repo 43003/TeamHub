@@ -21,23 +21,23 @@
                                                 <h5 class="mb-2">
                                                    <?=$_SESSION['SESS_NAME'];?>
                                                 </h5>
-                                                <p class="mb-2 font-weight-normal text-sm">
-                                                   CEO / Co-Founder
-                                                </p>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                     <div class="card-body p-3">
+                                       <?php
+                                          $rsp = $conn->query("SELECT * FROM lecturer WHERE lecturer_ID=".tosql($_SESSION["SESS_UID"]));
+                                       ?>
                                        <h6 class="mb-2">Description</h6>
                                        <p class="text-sm">
-                                          Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).
+                                          <?=$rsp->fields["description"];?>
                                        </p>
                                        <ul class="list-group">
-                                          <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; <?=$_SESSION['SESS_NAME'];?></li>
-                                          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; </li>
-                                          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <?=$_SESSION['SESS_EMEL'];?></li>
-                                       <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Office Location:</strong> &nbsp; <?php print dlookup("lecturer","office_location","lecturer_ID=".tosql($_SESSION['SESS_UID'])); ?></li>
+                                          <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; <?=$rsp->fields["lecturer_name"];?></li>
+                                          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Phone:</strong> &nbsp; <?=$rsp->fields["mobile_phone"];?> (Mobile) | <?=$rsp->fields["office_phone"];?> (Office)</li>
+                                          <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; <?=$rsp->fields["email"];?></li>
+                                       <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Office Location:</strong> &nbsp; <?=$rsp->fields["office_location"];?></li>
                                        </ul>
                                     </div>
                                  </div>

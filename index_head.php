@@ -14,12 +14,15 @@
 
       <link href="assets/css/icon.css?family=Material+Icons+Round" rel="stylesheet">
       <link id="pagestyle" href="assets/css/material-dashboard.min.css?v=3.0.6" rel="stylesheet" />
+      <link id="pagestyle" href="assets/css/jasny-bootstrap.min.css" rel="stylesheet" />
       
       <script src="assets/js/42d5adcbca.js"></script>
 
       <script src="assets/js/core/popper.min.js"></script>
-      <script src="assets/js/core/bootstrap.min.js"></script>
       <script src="assets/js/core/jquery.min.js"></script>
+      <script src="assets/js/core/bootstrap.min.js"></script>
+      <script src="assets/js/material-dashboard.min.js?v=3.0.6"></script>
+      <script src="assets/js/jasny-bootstrap.min.js"></script>
 
       <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
       <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>

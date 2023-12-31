@@ -34,7 +34,6 @@
         Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
       }
   </script>
-  <script src="assets/js/material-dashboard.min.js?v=3.0.6"></script>
   
   <?php 
   // $conn->debug=true;
