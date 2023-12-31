@@ -22,7 +22,7 @@
                                                    <?=$_SESSION['SESS_NAME'];?>
                                                 </h5>
                                                 <p class="mb-2 font-weight-normal text-sm">
-                                                   CEO / Co-Founder
+                                                   Lecturer
                                                 </p>
                                              </div>
                                           </div>
@@ -31,7 +31,7 @@
                                     <div class="card-body p-3">
                                        <h6 class="mb-2">Description</h6>
                                        <p class="text-sm">
-                                          Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).
+                                          Hi, I’m Zulisman Maksom,.
                                        </p>
                                        <ul class="list-group">
                                           <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; <?=$_SESSION['SESS_NAME'];?></li>
