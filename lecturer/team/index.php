@@ -1,10 +1,6 @@
-<script>
-        
-        </script>
-
         <?php
         // $conn->debug=true;
-        $sql="SELECT * FROM `course` WHERE `is_deleted`=0 AND `lecturer_ID`=".tosql($_SESSION['SESS_UID']);
+        $sql="SELECT * FROM `course` WHERE `is_deleted`=0 AND `course_status`=0  AND `lecturer_ID`=".tosql($_SESSION['SESS_UID']);
         $rs=$conn->query($sql);
         ?>
         <div class="row">
@@ -40,8 +36,18 @@
                     </div>
                     <div class="ms-auto text-end">
                       <div class="row">
-                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/team/generate.php;Team;Generate Teams;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
-                          <i class="material-icons text-sm me-2">autorenew</i>Generate Teams
+                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/team/student.php;Teams;Student List;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
+                          <i class="material-icons text-sm me-2">visibility</i>View Students
+                        </a>
+                      </div>
+                      <div class="row">
+                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/team/team.php;Teams;Team List;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
+                          <i class="material-icons text-sm me-2">persons</i>View Teams
+                        </a>
+                      </div>
+                      <div class="row">
+                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/team/assessment.php;Teams;Assessment List;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
+                          <i class="material-icons text-sm me-2">description</i>View Assessment
                         </a>
                       </div>
                     </div>

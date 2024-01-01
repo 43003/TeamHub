@@ -70,8 +70,7 @@
       $course_status=$rs->fields['course_status'];
       ?>
       <div class="modal-header">
-        <label class="modal-title fs-5">Assessment Information</label>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <label class="modal-title fs-5">Assessment Detail</label>
       </div>
       <div class="modal-body">
         <input type="hidden" name="ids" id="ids" value="<?=$ids?>">

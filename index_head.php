@@ -26,6 +26,7 @@
 
       <script src="assets/js/plugins/perfect-scrollbar.min.js"></script>
       <script src="assets/js/plugins/smooth-scrollbar.min.js"></script>
+      <script src="assets/js/plugins/fullcalendar.min.js"></script>
       <script src="assets/js/plugins/jquery.mask.min.js"></script>
       <script src="assets/js/plugins/choices.min.js"></script>
       <script src="assets/js/plugins/quill.min.js"></script>

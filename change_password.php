@@ -78,7 +78,6 @@
       </script>
       <div class="modal-header">
         <label class="modal-title fs-5">Change Password</label>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row">

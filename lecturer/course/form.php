@@ -9,7 +9,7 @@
         var course_code = $('#course_code').val();
         var course_name = $('#course_name').val();
         var description = $('#description').val();
-        var status = $('#status:checked').val();
+        var status = $('input[name=status]:checked').val();
         // console.log(status);
 
         var fd = new FormData();
@@ -70,8 +70,7 @@
       $course_status=$rs->fields['course_status'];
       ?>
       <div class="modal-header">
-        <label class="modal-title fs-5">Course Information</label>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <label class="modal-title fs-5">Course Detail</label>
       </div>
       <div class="modal-body">
         <input type="hidden" name="ids" id="ids" value="<?=$ids?>">
@@ -120,11 +119,11 @@
           <div class="col-md">
             <div class="input-group input-group-outline my-3">
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="status" id="status" value="0" <?php if($course_status=='' || $course_status=='0') print 'checked';?>>
+                <input class="form-check-input" type="radio" name="status" id="active" value="0" <?php if($course_status=='' || $course_status=='0') print 'checked';?>>
                 <label class="custom-control-label" for="active">Active</label>
               </div>
               <div class="form-check">
-                <input class="form-check-input" type="radio" name="status" id="status" value="1" <?php if($course_status=='1') print 'checked';?>>
+                <input class="form-check-input" type="radio" name="status" id="inactive" value="1" <?php if($course_status=='1') print 'checked';?>>
                 <label class="custom-control-label" for="inactive">Inactive</label>
               </div>
             </div>

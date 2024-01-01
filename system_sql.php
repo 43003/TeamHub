@@ -12,12 +12,13 @@ $pass = md5($password);
 
 if($pro=='LOGIN'){
 	if(strpos($email,'@student') !== false) {
-		$sql = "SELECT * FROM student WHERE  AND email=".tosql($email);
+		$sql = "SELECT * FROM student WHERE email=".tosql($email);
 		$type = "P";
 	} else {
 		$sql = "SELECT * FROM lecturer WHERE email=".tosql($email);
 		$type = "S";
 	}
+	
 	$rs = $conn->query($sql);
 	if($rs->recordcount()>=1){
 		if(!$rs->EOF){

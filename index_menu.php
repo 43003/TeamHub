@@ -35,8 +35,8 @@
                         <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder text-white">COURSE</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($module=='Course'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/course/index.php;Course;Courses List;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Courses'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/course/index.php;Courses;Courses List;;;;'); ?>">
                             <i class="material-icons-round">bookmark</i>
                             <span class="nav-link-text ms-2 ps-1">Courses</span>
                         </a>
@@ -45,15 +45,8 @@
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">STUDENT</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($module=='Student'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/student/index.php;Student;Students List;;;;'); ?>">
-                            <i class="material-icons-round">badge</i>
-                            <span class="nav-link-text ms-2 ps-1">Students</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if($module=='Team'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/team/index.php;Team;Generate Teams;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Teams'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/team/index.php;Teams;Generate Teams;;;;'); ?>">
                             <i class="material-icons-round">groups</i>
                             <span class="nav-link-text ms-2 ps-1">Teams</span>
                         </a>

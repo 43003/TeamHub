@@ -1,11 +1,14 @@
         <script src="assets/js/plugins/datatables.js"></script>
         <script>
+        function do_generate(ids) {
+          $('#myModalLg .modal-content').load('lecturer/team/form.php?ids='+ids)
+        }
         </script>
 
         <?php
         // $conn->debug=true;
         $cid=isset($_REQUEST["cid"])?$_REQUEST["cid"]:"";
-        $sql="SELECT * FROM `student_course` A, `student` B WHERE A.`status`=0 AND A.`course_ID`=".tosql($cid);
+        $sql="SELECT * FROM `student_course` A, `student` B WHERE A.`student_ID`=B.`student_ID` AND A.`status`<>2 AND A.`course_ID`=".tosql($cid);
         $rs=$conn->query($sql);
         ?>
         <div class="row">
@@ -19,6 +22,11 @@
                       [<?=dlookup("course","course_code"," course_ID=".tosql($cid))?> - <?=dlookup("course","course_name"," course_ID=".tosql($cid))?>]
                     </h6>
                   </div>
+                  <div class="col-6 text-end">
+                    <a class="btn bg-gradient-dark mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_generate('<?=$rs->fields['course_ID']?>')">
+                      <i class="material-icons text-sm">autorenew</i>&nbsp;&nbsp;Generate Team
+                    </a>
+                  </div>
                 </div>
               </div>
               <div class="card-body pt-4 p-3">
@@ -27,23 +35,29 @@
                     <thead class="thead-light">
                       <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-5">No</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-45">Name</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">Course <br>[Class]</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-35">Name</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-20">Matric No</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-10">Course <br>[Class]</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-10">Join Date</th>
                       </tr>
                     </thead>
                     <tbody>
                       <?php
+                      $bil=0;
                       while(!$rs->EOF){
                       ?>
                       <tr>
-                        <td class="text-sm font-weight-normal">1</td>
-                        <td class="text-sm font-weight-normal">Assignment 1</td>
-                        <td class="text-sm font-weight-normal">Assignment</td>
+                        <td class="text-sm font-weight-normal"><?=++$bil?></td>
                         <td class="text-sm font-weight-normal">
-                          Start Date <br>
-                          <b>[2011/04/25]</b> <br>
-                          <br>
+                          <?php if ($rs->fields['status'] == 0) { ?>
+                          <span class="badge bg-gradient-success">New</span>&nbsp; 
+                          <?php } ?>
+                          <?=$rs->fields["student_name"]?>
+                        </td>
+                        <td><?=$rs->fields["student_ID"]?></td>
+                        <td class="text-sm font-weight-normal"><?=$rs->fields["course"]?> <br>[<?=$rs->fields["class"]?>]</td>
+                        <td class="text-sm font-weight-normal">
+                          <b><?=DisplayDate($rs->fields["join_date"])?></b>
                         </td>
                       </tr>
                       <?php
@@ -62,7 +76,16 @@
           perPageSelect: false,
           sortable: false,
           searchable: false,
-          fixedHeight: true,
+          fixedHeight: false,
           fixedColumns: false,
+        });
+
+        $.ajax({
+          url: 'lecturer/team/team_sql.php?pro=STATUS',
+          type: 'POST',
+          data: {ids:<?=$cid?>},
+          success: function(data) {
+            console.log(data);
+          }
         });
         </script>
