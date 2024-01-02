@@ -49,9 +49,12 @@ if($pro=='STATUS'){
                 $conn->query($sqlTeam);
                 $last_id = $conn->insert_Id();
                 $initial++;
+                $teamLeader="Y";
+            } else {
+                $teamLeader="N";
             }
             
-            $sqlStudent="UPDATE `student_course` SET `team_ID`=".tosql($last_id)." WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($teams[$i]);
+            $sqlStudent="UPDATE `student_course` SET `team_ID`=".tosql($last_id).", `is_leader`=".tosql($teamLeader)." WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($teams[$i]);
             $conn->query($sqlStudent);
         }
         $err='OK';
@@ -71,9 +74,14 @@ if($pro=='STATUS'){
         $sqlTeam="INSERT INTO `team`(`course_ID`, `number_of_student`, `team_name`) VALUES (".tosql($ids).",".tosql(count($student)).",".tosql("Team ".++$initial[0]).")";
         $conn->query($sqlTeam);
         $last_id = $conn->insert_Id();
-
-        for ($i=0; $i < count($student); $i++) { 
-            $sqlStudent="UPDATE `student_course` SET `team_ID`=".tosql($last_id)." WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($student[$i]);
+        
+        for ($i=0; $i < count($student); $i++) {
+            if($i==0){
+                $teamLeader="Y";
+            } else {
+                $teamLeader="N";
+            }
+            $sqlStudent="UPDATE `student_course` SET `team_ID`=".tosql($last_id).", `is_leader`=".tosql($teamLeader)." WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($student[$i]);
             $conn->query($sqlStudent);
         }
 

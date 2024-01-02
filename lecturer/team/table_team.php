@@ -151,7 +151,12 @@
                           if ($bil==0) {
                         ?>
                         <td class="text-sm font-weight-normal"><?=$rsST->fields["student_ID"]?></td>
-                        <td class="text-sm font-weight-normal"><?=dlookup("student","student_name","student_ID=".tosql($rsST->fields["student_ID"]))?></td>
+                        <td class="text-sm font-weight-normal">
+                          <?=dlookup("student","student_name","student_ID=".tosql($rsST->fields["student_ID"]))?>
+                          <?php if ($rsST->fields["is_leader"]=="Y") { ?>
+                          &nbsp<span class="badge bg-gradient-success">Leader</span>
+                          <?php } ?>
+                        </td>
                       </tr>
                         <?php
                           } else {
