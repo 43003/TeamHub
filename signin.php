@@ -38,11 +38,11 @@
                                 <form name="hub" id="form" method="post" action="" enctype="multipart/form-data" autocomplete="off">
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="">
+                                        <input type="email" class="form-control" id="email" name="email">
                                     </div>
                                     <div class="input-group input-group-outline my-3">
                                         <label class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" value="">
+                                        <input type="password" class="form-control" id="password" name="password">
                                     </div>
                                     <div class="form-check form-check-info text-end ps-0">
                                         <input class="form-check-input" type="checkbox" id="showPassword" onclick="do_password()">
@@ -53,9 +53,6 @@
                                     <div class="text-center">
                                         <button type="button" class="btn bg-gradient-primary w-100 my-4 mb-2 btn-sign-in" onclick="do_login()">Sign in</button>
                                     </div>
-                                    <p class="mt-4 text-sm text-center">
-                                        Forgot Password? <a href="reset.php" class="text-primary text-gradient font-weight-bold">Reset Password</a>
-                                    </p>
                                 </form>
                             </div>
                         </div>

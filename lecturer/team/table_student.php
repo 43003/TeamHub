@@ -1,7 +1,8 @@
+        <?php include 'connection/common.php'; ?>
         <script src="assets/js/plugins/datatables.js"></script>
         <script>
         function do_generate(ids) {
-          $('#myModalLg .modal-content').load('lecturer/team/form.php?ids='+ids)
+          $('#myModalLg .modal-content').load('lecturer/team/form_student.php?ids='+ids)
         }
         </script>
 
@@ -22,11 +23,18 @@
                       [<?=dlookup("course","course_code"," course_ID=".tosql($cid))?> - <?=dlookup("course","course_name"," course_ID=".tosql($cid))?>]
                     </h6>
                   </div>
+                  <?php 
+                  $countTeam = dlookup_cnt("student_course", "team_ID","team_ID IS NOT NULL");
+                  if ($countTeam == 0) { 
+                  ?>
                   <div class="col-6 text-end">
                     <a class="btn bg-gradient-dark mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_generate('<?=$rs->fields['course_ID']?>')">
                       <i class="material-icons text-sm">autorenew</i>&nbsp;&nbsp;Generate Team
                     </a>
                   </div>
+                  <?php 
+                  } 
+                  ?>
                 </div>
               </div>
               <div class="card-body pt-4 p-3">
@@ -54,7 +62,7 @@
                           <?php } ?>
                           <?=$rs->fields["student_name"]?>
                         </td>
-                        <td><?=$rs->fields["student_ID"]?></td>
+                        <td class="text-sm font-weight-normal"><?=$rs->fields["student_ID"]?></td>
                         <td class="text-sm font-weight-normal"><?=$rs->fields["course"]?> <br>[<?=$rs->fields["class"]?>]</td>
                         <td class="text-sm font-weight-normal">
                           <b><?=DisplayDate($rs->fields["join_date"])?></b>

@@ -1,4 +1,5 @@
                <?php include 'connection/common.php'; ?>
+               <script src="assets/js/plugins/datatables.js"></script>
                <div class="row">
                   <div class="col">
                      <div class="card h-100">                        
@@ -73,13 +74,13 @@
                               <?php 
                               $sqlC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
                               $rsC = $conn->query($sqlC);
-                              $colours = ['primary', 'info', 'dark'];
+                              $colours = ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'];
                               $bil=0;
                               while(!$rsC->EOF){
                               ?>
                               <div class="col my-auto">
                                  <span class="badge badge-md badge-dot me-4 d-block text-start">
-                                    <i class="bg-<?=$colours[$bil];?>"></i>
+                                    <i style="background-color: <?=$colours[$bil];?>"></i>
                                     <span class="text-dark text-xs"><?=$rsC->fields['course_code']?></span>
                                  </span>
                               </div>
@@ -90,18 +91,18 @@
                               ?>
                            </div>
                         </div>
-                        <div class="card-footer pt-0 pb-0 p-3 d-flex align-items-center">
+                        <div class="card-footer pt-0 pb-0 p-3">
                            <div class="w-100">
                               <div class="table-responsive">
-                                 <table class="table align-items-center">
-                                    <thead>
+                                 <table class="table" id="dt_chart">
+                                    <thead class="thead-light">
                                        <tr>
-                                          <td class="w-30"><p class="text-xs font-weight-bold mb-0 ">Course</p></td>
-                                          <td class="w-60"><p class="text-xs text-center font-weight-bold mb-0 ">Total Students</p></td>
+                                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-65">Course</th>
+                                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-35">Total Students</th>
                                        </tr>
                                     </thead>
                                     <tbody>
-                                       <?php 
+                                    <?php 
                                        $sqlCN = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
                                        $rsCN = $conn->query($sqlCN);
                                        $bil=0;
@@ -153,22 +154,30 @@
                   </div>
                   <script src="assets/js/plugins/chartjs.min.js"></script>
                   <script>
+                  const dt_chart = new simpleDatatables.DataTable("#dt_chart", {
+                     perPageSelect: false,
+                     sortable: false,
+                     searchable: false,
+                     fixedHeight: false,
+                     fixedColumns: false,
+                     paging: false,
+                  });
                   var chart_student = document.getElementById("student_chart").getContext("2d");
                   
                   <?php                  
                   $sqlDC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
                   $rsDC = $conn->query($sqlDC);
-
+                  // $conn->debug=true;
                   $data_course="";
                   $data_student="";
                   $bills=0;
                   while (!$rsDC->EOF) {
-                     $sqlDS = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsC->fields['course_ID']);
+                     $sqlDS = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsDC->fields['course_ID']);
                      $rsDS = $conn->query($sqlDS);
                      
                      if($bills > 0){
-                        $data_course.=",".$rsDC->fields['course_code'];
-                        $data_student.=",".$rsDS->fields['total_student'];
+                        $data_course.="','".$rsDC->fields['course_code'];
+                        $data_student.="','".$rsDS->fields['total_student'];
                      } else {
                         $data_course.=$rsDC->fields['course_code'];
                         $data_student.=$rsDS->fields['total_student'];
@@ -191,7 +200,7 @@
                            borderWidth: 1,
                            backgroundColor: ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'],
                            data: ['<?=$data_student?>'],
-                           fill: false
+                           fill: true
                         }],
                      },
                      options: {
