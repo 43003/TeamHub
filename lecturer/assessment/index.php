@@ -94,10 +94,10 @@
                         <td class="text-sm font-weight-normal">sdasdasdassd</td>
                         <td class="text-sm font-weight-normal">
                           Start Date <br>
-                          <b>[2011/04/25]</b> <br>
+                          <b>[2023/04/25]</b> <br>
                           <br>
                           End Date <br>
-                          <b>[2011/04/25]</b> <br>
+                          <b>[2023/04/25]</b> <br>
                         </td>
                         <td class="text-sm font-weight-normal">                        
                         <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
