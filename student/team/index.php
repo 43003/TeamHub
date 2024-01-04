@@ -1,6 +1,44 @@
         <script>
-        function do_form(team,course){
-          $('#myModalLg .modal-content').load('student/team/modal.php?team_id='+team+"&course_id="+course)
+        function do_modal(ids,team){
+          $('#myModalLg .modal-content').load('student/team/modal.php?ids='+ids+"&team="+team)
+        }
+
+        function do_delete(ids){
+          Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, do it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              $.ajax({
+                url: 'student/team/team_sql.php?pro=DELETE',
+                type: 'POST',
+                data: {ids:ids},
+                success: function(data) {
+                  if(data == 'OK') {
+                    Swal.fire({
+                      title: "Success!",
+                      text: "You have successfully drop this course.",
+                      icon: "success"
+                    }).then(function(){
+                      window.location.reload();
+                    });
+                  } else {
+                    Swal.fire({
+                      title: "Error!",
+                      text: "There is an error in the server side!",
+                      icon: "error"
+                    });
+                    // $('.btn-sign-in').prop("disabled",false);
+                  }
+                }
+              });
+            }
+          });
         }
         </script>
 
@@ -35,15 +73,20 @@
                       <span class="mb-2">Lecturer: <b><?=dlookup("lecturer","lecturer_name","lecturer_ID=".tosql($rs->fields["lecturer_ID"]))?></b></span>
                       <span class="mb-2">Description: <?=$rs->fields['course_description'];?></span>
                     </div>
-                    <?php if (!empty($rs->fields["team_ID"])) { ?>
                     <div class="ms-auto text-end">
+                      <?php if (!empty($rs->fields["team_ID"])) { ?>
                       <div class="row">
                         <a class="btn btn-link text-info px-3 mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_modal('<?=$rs->fields['course_ID']?>','<?=$rs->fields['team_ID']?>')">
                           <i class="material-icons text-sm me-2">visibility</i>View Team Members
                         </a>
                       </div>
+                      <?php } ?>
+                      <div class="row">
+                        <a class="btn btn-link text-danger px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['course_ID']?>')">
+                          <i class="material-icons text-sm me-2">delete</i>Drop Course
+                        </a>
+                      </div>
                     </div>
-                    <?php } ?>
                   </li>
                   <?php
                       $rs->movenext();
