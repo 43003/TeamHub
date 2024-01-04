@@ -1,7 +1,7 @@
         <script src="assets/js/plugins/datatables.js"></script>
         <script>
-        function do_form(ids){
-          $('#myModalLg .modal-content').load('lecturer/assessment/form.php?ids='+ids)
+        function do_form(ids,course){
+          $('#myModalLg .modal-content').load('lecturer/assessment/form.php?ids='+ids+'&course='+course)
         }
 
         function do_delete(ids){
@@ -64,7 +64,7 @@
                     </h6>
                   </div>
                   <div class="col-6 text-end">
-                    <a class="btn bg-gradient-dark mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('')">
+                    <a class="btn bg-gradient-dark mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('','<?=$cid?>')">
                       <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Add New Assessment
                     </a>
                   </div>
@@ -85,25 +85,28 @@
                     </thead>
                     <tbody>
                       <?php
+                      $bil=0;
                       while(!$rs->EOF){
                       ?>
                       <tr>
-                        <td class="text-sm font-weight-normal">1</td>
-                        <td class="text-sm font-weight-normal">Assignment 1</td>
-                        <td class="text-sm font-weight-normal">Assignment</td>
-                        <td class="text-sm font-weight-normal">sdasdasdassd</td>
+                        <td class="text-sm font-weight-normal"><?=++$bil?></td>
+                        <td class="text-sm font-weight-normal"><?=$rs->fields['title']?></td>
+                        <td class="text-sm font-weight-normal"><?=dlookup("assessment_type","type_name","assessment_type_ID=".tosql($rs->fields['category']))?></td>
+                        <td class="text-sm font-weight-normal">
+                          <a href="uploads/assessment/<?=$rs->fields['docs']?>"><i class="material-icons text-sm me-2">download</i>Download</a>
+                        </td>
                         <td class="text-sm font-weight-normal">
                           Start Date <br>
-                          <b>[2023/04/25]</b> <br>
+                          <b><?=$rs->fields['start_date']?></b> <br>
                           <br>
                           End Date <br>
-                          <b>[2023/04/25]</b> <br>
+                          <b><?=$rs->fields['due_date']?></b> <br>
                         </td>
                         <td class="text-sm font-weight-normal">                        
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['course_ID']?>')">
+                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;" data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_form('<?=$rs->fields['assessment_ID']?>','<?=$rs->fields['course_ID']?>')">
                             <i class="material-icons text-sm me-2">edit</i>Edit
                           </a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['course_ID']?>')">
+                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;" onclick="do_delete('<?=$rs->fields['assessment_ID']?>')">
                             <i class="material-icons text-sm me-2">delete</i>Delete
                           </a>
                         </td>

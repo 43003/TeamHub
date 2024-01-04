@@ -6,20 +6,25 @@
 
       function do_save(){
         var ids = $('#ids').val();
-        var course_code = $('#course_code').val();
-        var course_name = $('#course_name').val();
-        var description = $('#description').val();
-        var status = $('#status:checked').val();
-        // console.log(status);
+        var course = $('#course').val();
+        var assessment_type = $('#assessment_type').val();
+        var assessment_title = $('#assessment_title').val();
+        var assessment_document = $('#assessment_document')[0].files[0];
+        var assessment_document_value = $('#assessment_document').val(); 
+        var date_start = $('#date_start').val();
+        var date_end = $('#date_end').val();
+        // console.log(assessment_document_value);
 
         var fd = new FormData();
         fd.append('ids',ids);
-        fd.append('course_code',course_code);
-        fd.append('course_name',course_name);
-        fd.append('description',description);
-        fd.append('status',status);
+        fd.append('course',course);
+        fd.append('assessment_type',assessment_type);
+        fd.append('assessment_title',assessment_title);
+        fd.append('assessment_document',assessment_document);
+        fd.append('date_start',date_start);
+        fd.append('date_end',date_end);
         
-        if(course_code=='' && course_name=='' && description==''){
+        if(assessment_type.trim()=='' || assessment_title.trim()=='' || assessment_document_value.trim()=='' || date_start.trim()=='' || date_end.trim()==''){
           Swal.fire({
             title: "Warning!",
             text: "Please fill all the information!",
@@ -27,7 +32,7 @@
           });
         } else {
           $.ajax({
-            url: 'lecturer/course/course_sql.php?pro=SAVE',
+            url: 'lecturer/assessment/assessment_sql.php?pro=SAVE',
             type: 'POST',
             beforeSend: function () {
               // $('.btn-submit').prop("disabled",true);
@@ -60,20 +65,22 @@
       </script>
       <?php
       $ids=isset($_GET["ids"])?$_GET["ids"]:"";
+      $course=isset($_GET["course"])?$_GET["course"]:"";
       // $conn->debug=true;
-      $sql="SELECT * FROM course WHERE course_ID=".tosql($ids);
+      $sql="SELECT * FROM assessment WHERE assessment_ID=".tosql($ids);
       $rs = $conn->query($sql);
 
-      $course_code=$rs->fields['course_code'];
-      $course_name=$rs->fields['course_name'];
-      $course_description=$rs->fields['course_description'];
-      $course_status=$rs->fields['course_status'];
+      $category=$rs->fields['category'];
+      $title=$rs->fields['title'];
+      $start_date=$rs->fields['start_date'];
+      $due_date=$rs->fields['due_date'];
       ?>
       <div class="modal-header">
         <label class="modal-title fs-5">Assessment Detail</label>
       </div>
       <div class="modal-body">
         <input type="hidden" name="ids" id="ids" value="<?=$ids?>">
+        <input type="hidden" name="course" id="course" value="<?=$course?>">
         <div class="row">
           <div class="col-md-2">
             <div class="input-group input-group-inline my-3">
@@ -89,7 +96,9 @@
                 $rsT=$conn->query($sqlT);
                 while (!$rsT->EOF) {
                 ?>
-                <option value="<?=$rsT->fields['assessment_type_ID']?>"><?=$rsT->fields['type_name']?></option>
+                <option value="<?=$rsT->fields['assessment_type_ID']?>" <?php if ($category == $rsT->fields['assessment_type_ID']) print 'selected' ?>>
+                  <?=$rsT->fields['type_name']?>
+                </option>
                 <?php
                   $rsT->movenext();
                 }
@@ -106,7 +115,7 @@
           </div>
           <div class="col-md-10">
             <div class="input-group input-group-outline my-3">
-              <input id="assessment_title" name="assessment_title" type="text" class="form-control" value="" onkeyup="upperCase(this)">
+              <input id="assessment_title" name="assessment_title" type="text" class="form-control" value="<?=$title?>" onkeyup="upperCase(this)">
             </div>
           </div>
         </div>
@@ -118,7 +127,7 @@
           </div>
           <div class="col-md-10">
             <div class="input-group input-group-outline my-3">
-              <input type="file" class="form-control" name="assessment_document" id="assessment_document">
+              <input type="file" class="form-control" name="assessment_document" id="assessment_document" value="">
             </div>
           </div>
         </div>
@@ -130,7 +139,7 @@
           </div>
           <div class="col-md-4">
             <div class="input-group input-group-outline my-3">
-              <input class="form-control datetimepicker" type="text" name="date_start" id="date_start" data-input>
+              <input class="form-control datetimepicker" type="text" name="date_start" id="date_start" data-input value="">
             </div>
           </div>
         </div><div class="row">
@@ -141,7 +150,7 @@
           </div>
           <div class="col-md-4">
             <div class="input-group input-group-outline my-3">
-              <input class="form-control datetimepicker" type="text" name="date_end" id="date_end" data-input>
+              <input class="form-control datetimepicker" type="text" name="date_end" id="date_end" data-input value="">
             </div>
           </div>
         </div>
@@ -151,9 +160,19 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
       <script>
-        $(".datetimepicker").flatpickr({
+        $("#date_start").flatpickr({
           allowInput: false,
           enableTime: true,
           dateFormat: "Y-m-d H:i",
+          minuteIncrement: 1,
+          defaultDate: '<?=$start_date?>'
+        });
+        
+        $("#date_end").flatpickr({
+          allowInput: false,
+          enableTime: true,
+          dateFormat: "Y-m-d H:i",
+          minuteIncrement: 1,
+          defaultDate: '<?=$due_date?>'
         });
       </script>

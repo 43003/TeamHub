@@ -12,14 +12,42 @@ $ids=isset($_REQUEST["ids"])?$_REQUEST["ids"]:"";
 // exit();
 
 if($pro=='SAVE'){
+    $course=isset($_REQUEST["course"])?$_REQUEST["course"]:"";
+    $assessment_type=isset($_REQUEST["assessment_type"])?$_REQUEST["assessment_type"]:"";
+    $assessment_title=isset($_REQUEST["assessment_title"])?$_REQUEST["assessment_title"]:"";
+    $assessment_document=isset($_REQUEST["assessment_document"])?$_REQUEST["assessment_document"]:"";
+    $date_start=isset($_REQUEST["date_start"])?$_REQUEST["date_start"]:"";
+    $date_end=isset($_REQUEST["date_end"])?$_REQUEST["date_end"]:"";
+
     try {
+		if(!empty($_FILES['assessment_document']['name'])){
+			$valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'pdf', 'JPEG', 'JPG', 'PNG', 'GIF', 'PDF'); // valid extensions
+			$path = '../../uploads/assessment/'; // upload directory
+			
+			$img = $_FILES['assessment_document']['name'];
+			$tmp = $_FILES['assessment_document']['tmp_name'];
+	
+			$ext = end((explode(".", $img))); 
+			$fname = $ids."_assessment.".$ext;
+			$fname = str_replace(" ", "_", $fname);
+			$fname = str_replace("-", "_", $fname);
+			
+			// $final_image = "perubahanNamaItem_".$appli_id.".".$ext;
+			$final_image = strtolower(rand(1000,1000000)."_".$fname);
+			// print $final_image;
+			if(in_array($ext, $valid_extensions)){ 
+				$path = $path.$final_image; 
+				move_uploaded_file($tmp,$path);
+			}
+		}
+
         if(empty($ids)){
-            $sql="INSERT INTO `course`(`lecturer_ID`, `course_code`, `course_name`, `course_description`, `course_status`,`is_deleted`) 
-            VALUES (".tosql($_SESSION['SESS_UID']).",".tosql($course_code).",".tosql($course_name).",".tosql($description).",".tosql($status).",'0')";
+            $sql="INSERT INTO `assessment`(`course_ID`, `title`, `category`, `docs`, `start_date`, `due_date`, `is_deleted`)  
+            VALUES (".tosql($course).",".tosql($assessment_title).",".tosql($assessment_type).",".tosql($final_image).",".tosql($date_start).",".tosql($date_end).",'0')";
 
         } else {
-            $sql="UPDATE `course` SET `course_code`=".tosql($course_code).",`course_name`=".tosql($course_name).",
-            `course_description`=".tosql($description).",`course_status`=".tosql($status)." WHERE `course_ID`=".tosql($ids);
+            $sql="UPDATE `course` SET `category`=".tosql($assessment_type).",`title`=".tosql($assessment_title).",`docs`=".tosql($final_image).
+            ", `start_date`=".tosql($date_start).",`due_date`=".tosql($date_end)." WHERE `course_ID`=".tosql($ids);
 
         }
         $conn->execute($sql);
@@ -31,7 +59,7 @@ if($pro=='SAVE'){
 
 } else if($pro=='DEL'){
     try {
-        $sql="UPDATE `course` SET `is_deleted`='1' WHERE `course_ID`=".tosql($ids);
+        $sql="UPDATE `assessment` SET `is_deleted`='1' WHERE `assessment_ID`=".tosql($ids);
 
         $conn->execute($sql);
 		$err='OK';

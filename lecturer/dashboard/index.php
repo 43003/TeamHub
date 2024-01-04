@@ -49,7 +49,7 @@
                   </div>
                </div>
                <div class="row mt-6">
-                  <div class="col-lg-4 col-sm-6">
+                  <div class="col">
                      <div class="card h-100">
                         <div class="card-header p-3 pt-2">
                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 me-3 float-start">
@@ -64,75 +64,71 @@
                         </div>
                         <div class="card-body pb-0 p-3 mt-4">
                            <div class="row">
-                              <div class="col text-start">
-                                    <div class="chart">
-                                       <canvas id="student_chart" class="chart-canvas" height="200"></canvas>
-                                    </div>
+                              <div class="col-md-3 text-start">
+                                 <div class="chart">
+                                    <canvas id="student_chart" class="chart-canvas" height="200"></canvas>
+                                 </div>
                               </div>
-                           </div>
-                           <div class="row">
-                              <?php 
-                              $sqlC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
-                              $rsC = $conn->query($sqlC);
-                              $colours = ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'];
-                              $bil=0;
-                              while(!$rsC->EOF){
-                              ?>
-                              <div class="col my-auto">
+                              <div class="col-md-1 my-auto">
+                                 <?php 
+                                 $sqlC = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
+                                 $rsC = $conn->query($sqlC);
+                                 $colours = ['#17c1e8', '#e91e63', '#3A416F', '#a8b8d8'];
+                                 $bil=0;
+                                 while(!$rsC->EOF){
+                                 ?>
                                  <span class="badge badge-md badge-dot me-4 d-block text-start">
                                     <i style="background-color: <?=$colours[$bil];?>"></i>
                                     <span class="text-dark text-xs"><?=$rsC->fields['course_code']?></span>
                                  </span>
+                                 <?php
+                                    $bil++;
+                                    $rsC->movenext();
+                                 }
+                                 ?>
                               </div>
-                              <?php
-                                 $bil++;
-                                 $rsC->movenext();
-                              }
-                              ?>
-                           </div>
-                        </div>
-                        <div class="card-footer pt-0 pb-0 p-3">
-                           <div class="w-100">
-                              <div class="table-responsive">
-                                 <table class="table" id="dt_chart">
-                                    <thead class="thead-light">
-                                       <tr>
-                                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-65">Course</th>
-                                          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 w-35">Total Students</th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php 
-                                       $sqlCN = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
-                                       $rsCN = $conn->query($sqlCN);
-                                       $bil=0;
-                                       while(!$rsCN->EOF){
-                                          $sqlST = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsCN->fields['course_ID']);
-                                          $rsST = $conn->query($sqlST);
-                                       ?>
-                                       <tr>
-                                          <td>
-                                             <h6 class="text-sm font-weight-normal mb-0 "><?=$rsCN->fields['course_code']?> - <?=$rsCN->fields['course_name']?></h6>
-                                          </td>
-                                          <td class="w-30">
-                                             <div class="text-center">
-                                                <h6 class="text-sm font-weight-normal mb-0 "><?=$rsST->fields['total_student']?></h6>
-                                             </div>
-                                          </td>
-                                       </tr>
-                                       <?php
-                                          $bil++;
-                                          $rsCN->movenext();
-                                       }
-                                       ?>
-                                    </tbody>
-                                 </table>
+                              <div class="col-md-8 my-auto">
+                                 <div class="table-responsive">
+                                    <table class="table" id="dt_chart">
+                                       <thead class="thead-light">
+                                          <tr>
+                                             <th class="text-uppercase text-secondary text-sm font-weight-bolder opacity-7 w-65">Course</th>
+                                             <th class="text-uppercase text-secondary text-sm text-center font-weight-bolder opacity-7 w-35">Total Students</th>
+                                          </tr>
+                                       </thead>
+                                       <tbody>
+                                       <?php 
+                                          $sqlCN = "SELECT * FROM course WHERE is_deleted='0' AND course_status='0' AND lecturer_ID=".tosql($_SESSION['SESS_UID']);
+                                          $rsCN = $conn->query($sqlCN);
+                                          $bil=0;
+                                          while(!$rsCN->EOF){
+                                             $sqlST = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsCN->fields['course_ID']);
+                                             $rsST = $conn->query($sqlST);
+                                          ?>
+                                          <tr>
+                                             <td>
+                                                <h6 class="text-sm font-weight-normal mb-0 "><?=$rsCN->fields['course_code']?> - <?=$rsCN->fields['course_name']?></h6>
+                                             </td>
+                                             <td class="w-30">
+                                                <div class="text-center">
+                                                   <h6 class="text-sm font-weight-normal mb-0 "><?=$rsST->fields['total_student']?></h6>
+                                                </div>
+                                             </td>
+                                          </tr>
+                                          <?php
+                                             $bil++;
+                                             $rsCN->movenext();
+                                          }
+                                          ?>
+                                       </tbody>
+                                    </table>
+                                 </div>
                               </div>
                            </div>
                         </div>
                      </div>
                   </div>
-                  <div class="col-lg-8 col-sm-6 mt-sm-0 mt-4">
+                  <!-- <div class="col-lg-8 col-sm-6 mt-sm-0 mt-4">
                      <div class="card h-100">
                         <div class="card-header p-3 pt-2">
                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 me-3 float-start">
@@ -151,7 +147,7 @@
                            </div>
                         </div>
                      </div>
-                  </div>
+                  </div> -->
                   <script src="assets/js/plugins/chartjs.min.js"></script>
                   <script>
                   const dt_chart = new simpleDatatables.DataTable("#dt_chart", {

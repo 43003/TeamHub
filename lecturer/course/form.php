@@ -19,7 +19,7 @@
         fd.append('description',description);
         fd.append('status',status);
         
-        if(course_code=='' && course_name=='' && description==''){
+        if(course_code=='' || course_name=='' || description==''){
           Swal.fire({
             title: "Warning!",
             text: "Please fill all the information!",
