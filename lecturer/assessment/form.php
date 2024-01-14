@@ -88,6 +88,7 @@
             </div>
           </div>
           <div class="col-md-3">
+            <?php if(empty($ids)) { ?>
             <div class="input-group input-group-outline my-3">
               <select class="form-control assessment_type" name="assessment_type" id="assessment_type">
                 <option value="">Please Select</option>
@@ -104,7 +105,13 @@
                 }
                 ?>
               </select>
+            </div>    
+            <?php } else { ?>
+              <div class="col-md-4">
+                <p><?=dlookup("assessment_type","type_name","assessment_type_ID=".tosql($category))?></p>
+              <input id="assessment_type" name="assessment_type" type="hidden" class="form-control" value="<?=$category?>">
             </div>
+            <?php } ?>
           </div>
         </div>
         <div class="row">

@@ -88,7 +88,7 @@
                     </div>
                     <div class="ms-auto text-end">
                       <div class="row">
-                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;Course;Assessments List;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
+                        <a class="btn btn-link text-info px-3 mb-0" href="index.php?data=<?php print base64_encode($dir.'/assessment/index.php;Courses;Assessments List;;;;'); ?>&cid=<?=$rs->fields['course_ID']?>">
                           <i class="material-icons text-sm me-2">add</i>Add Assessment
                         </a>
                       </div>

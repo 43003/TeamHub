@@ -98,7 +98,7 @@
             input: "select",
             inputOptions: {
               <?php while (!$rsTeam->EOF) { ?>
-              <?=$rsTeam->fields['team_ID']?> : "<?=$rsTeam->fields['team_name']?>",
+              <?=$rsTeam->fields['team_ID']?> <?php print ":" ?> "<?=$rsTeam->fields['team_name']?>" <?php print "," ?>
               <?php $rsTeam->movenext(); } ?>
             },
             inputPlaceholder: "Select a team",
@@ -179,7 +179,7 @@
                       ?>
                       <tr>
                         <td class="text-sm font-weight-normal">
-                          <?php if (empty($rs->fields['team_ID'])) { ?>
+                          <?php if ($rs->fields['status'] != 9 && empty($rs->fields['team_ID'])) { ?>
                           <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="student[]" id="student" value="<?=$rs->fields["student_ID"]?>">
                           </div>
@@ -188,7 +188,7 @@
                         <td class="text-sm font-weight-normal">
                           <?php if ($rs->fields['status'] == 0) { ?>
                           <span class="badge bg-gradient-success">New</span>&nbsp; 
-                          <?php } else if ($rs->fields['status'] == 2) { ?>
+                          <?php } else if ($rs->fields['status'] == 9) { ?>
                           <span class="badge bg-gradient-danger">Drop</span>&nbsp; 
                           <?php } ?>
                           <?=$rs->fields["student_name"]?>
@@ -199,7 +199,7 @@
                           <b><?=DisplayDate($rs->fields["join_date"])?></b>
                         </td>
                         <td class="text-sm font-weight-normal">
-                          <?php if ($rs->fields['status'] != 2 && empty($rs->fields['team_ID']) && dlookup_cnt("team","team_ID","course_ID=".tosql($cid)) > 0) { ?>
+                          <?php if ($rs->fields['status'] != 9 && empty($rs->fields['team_ID']) && dlookup_cnt("team","team_ID","course_ID=".tosql($cid)) > 0) { ?>
                           <a class="btn bg-gradient-dark mb-0" href="javascript:;" onclick="do_join('<?=$cid?>','<?=$rs->fields['student_ID']?>')">
                             <i class="material-icons text-sm">input</i>&nbsp;&nbsp;Join Team
                           </a>

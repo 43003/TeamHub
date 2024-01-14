@@ -61,6 +61,18 @@
 		return $dtmDate;
 	}
 
+	function DisplayDateE($dtmDate, $bahasa){
+		$year = substr($dtmDate, 0, 4); // returns YYYY
+		$month = substr($dtmDate, 5, 2); // returns MM
+		$day = substr($dtmDate, 8, 2); // returns DD
+		if($day == '00' || $day == ''){
+			$dtmDate = '';
+		}else{			
+			$dtmDate = $day." ". viewmonth($month, $bahasa)." ".$year;
+		}
+		return $dtmDate;
+	}
+
 	/**
 	 * Returns the number of week in a month for the specified date.
 	 *
@@ -179,7 +191,42 @@
 		return $dtmDate;
 	}
 
-function viewdate($month)  { // to show month in Bahasa
+	function viewmonth($month, $bahasa)  {
+		if($bahasa=='BM'){
+			switch($month) {
+				case '01' : $m = 'Januari'; break;
+				case '02' : $m = 'Februari'; break;
+				case '03' : $m = 'Mac'; break; 
+				case '04' : $m = 'April'; break; 
+				case '05' : $m = 'Mei'; break; 
+				case '06' : $m = 'Jun'; break;
+				case '07' : $m = 'Julai'; break;
+				case '08' : $m = 'Ogos'; break;
+				case '09' : $m = 'September'; break;
+				case '10' : $m = 'Oktober'; break;
+				case '11' : $m = 'November'; break;
+				case '12' : $m = 'Disember'; break;
+			}  return $m;
+		} else {
+			switch($month) {
+				case '01' : $m = 'January'; break;
+				case '02' : $m = 'February'; break;
+				case '03' : $m = 'March'; break; 
+				case '04' : $m = 'April'; break; 
+				case '05' : $m = 'May'; break; 
+				case '06' : $m = 'June'; break;
+				case '07' : $m = 'July'; break;
+				case '08' : $m = 'August'; break;
+				case '09' : $m = 'September'; break;
+				case '10' : $m = 'October'; break;
+				case '11' : $m = 'November'; break;
+				case '12' : $m = 'Disember'; break;
+			}
+			return $m;
+		}
+	}
+
+	function viewdate($month)  { // to show month in Bahasa
 //		if($bahasa=='BM'){	  
             switch($month) {
 				case '01' : $m = 'Januari'; break;
@@ -213,6 +260,6 @@ function viewdate($month)  { // to show month in Bahasa
 			return $m;
 		}
 */
-      }  // end of show month
+	}  // end of show month
 
 ?>

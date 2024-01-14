@@ -11,9 +11,16 @@ $ids=isset($_REQUEST["ids"])?$_REQUEST["ids"]:"";
 // }
 // exit();
 
-if($pro=='DELETE'){
+if($pro=='CHANGE'){
+    $team=isset($_REQUEST["team"])?$_REQUEST["team"]:"";
+    $team_id=isset($_REQUEST["team_id"])?$_REQUEST["team_id"]:"";
     try {
-        $sql="UPDATE `student_course` SET `status`='2' WHERE `course_ID`=".tosql($ids);
+
+        $conn->execute("UPDATE `team` SET number_of_student=number_of_student-1 WHERE team_ID=".tosql($team));
+
+        $conn->execute("UPDATE `team` SET number_of_student=number_of_student+1 WHERE team_ID=".tosql($team_id));
+
+        $sql="UPDATE `student_course` SET `team_ID`=".tosql($team_id)." WHERE `student_ID`=".tosql($_SESSION['SESS_UID']);
         $conn->execute($sql);
 		$err='OK';
     } catch (\Throwable $th) {

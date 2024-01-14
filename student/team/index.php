@@ -47,7 +47,7 @@
 
         $sql="SELECT A.course_ID, A.team_ID, b.lecturer_ID, B.course_code, B.course_name, B.course_description 
         FROM `student_course` A, `course` B 
-        WHERE  A.`course_ID`=B.`course_ID` AND A.`status`<>2 AND A.`student_ID`=".tosql($_SESSION['SESS_UID']);
+        WHERE  A.`course_ID`=B.`course_ID` AND A.`status`<> 9 AND A.`student_ID`=".tosql($_SESSION['SESS_UID']);
 
         $rs=$conn->query($sql);
         ?>
@@ -77,7 +77,7 @@
                       <?php if (!empty($rs->fields["team_ID"])) { ?>
                       <div class="row">
                         <a class="btn btn-link text-info px-3 mb-0" href="javascript:;"  data-bs-toggle="modal" data-bs-target="#myModalLg" onclick="do_modal('<?=$rs->fields['course_ID']?>','<?=$rs->fields['team_ID']?>')">
-                          <i class="material-icons text-sm me-2">visibility</i>View Team Members
+                          <i class="material-icons text-sm me-2">visibility</i>View Team
                         </a>
                       </div>
                       <?php } ?>

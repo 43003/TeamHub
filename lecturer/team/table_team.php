@@ -36,7 +36,7 @@
                 }
               });
             }
-          });                    
+          });
         }
 
         function do_leader(ids,student,team) {

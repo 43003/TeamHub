@@ -42,18 +42,35 @@ if($pro=='SAVE'){
 		}
 
         if(empty($ids)){
-            $sql="INSERT INTO `assessment`(`course_ID`, `title`, `category`, `docs`, `start_date`, `due_date`, `is_deleted`)  
+    
+            $sqli="INSERT INTO `assessment`(`course_ID`, `title`, `category`, `docs`, `start_date`, `due_date`, `is_deleted`)  
             VALUES (".tosql($course).",".tosql($assessment_title).",".tosql($assessment_type).",".tosql($final_image).",".tosql($date_start).",".tosql($date_end).",'0')";
+        
+            $conn->execute($sqli);
+        
+            $aid = $conn->insert_Id();
+
+            $student = $conn->query("SELECT * FROM student_course WHERE course_ID=".tosql($course)." AND status <> 9");
+
+            while (!$student->EOF) {
+                $sql="INSERT INTO `task_assign`(`student_course_ID`, `assessment_ID`, `status`)  
+                VALUES (".tosql($student->fields['student_course_ID']).",".tosql($aid).",'0')";
+                
+                $conn->execute($sql);
+
+                $student->movenext();
+            }
 
         } else {
-            $sql="UPDATE `course` SET `category`=".tosql($assessment_type).",`title`=".tosql($assessment_title).",`docs`=".tosql($final_image).
+            $sql="UPDATE `course` SET `title`=".tosql($assessment_title).",`docs`=".tosql($final_image).
             ", `start_date`=".tosql($date_start).",`due_date`=".tosql($date_end)." WHERE `course_ID`=".tosql($ids);
 
+            $conn->execute($sql);
         }
-        $conn->execute($sql);
+
 		$err='OK';
     } catch (\Throwable $th) {
-        //throw $th;
+        // throw $th;
         $err='ERR';
     }
 

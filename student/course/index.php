@@ -54,7 +54,7 @@
 
         <?php
         // $conn->debug=true;
-        $sql="SELECT * FROM `course` WHERE `is_deleted`=0 AND `course_status`=0 AND `course_ID` NOT IN (SELECT `course_ID` FROM `student_course` WHERE `student_ID`=".tosql($_SESSION["SESS_UID"]).")";
+        $sql="SELECT * FROM `course` WHERE `is_deleted`=0 AND `course_status`=0 AND `course_ID` NOT IN (SELECT `course_ID` FROM `student_course` WHERE `student_ID`=".tosql($_SESSION["SESS_UID"])." AND status <> '9')";
         $rs=$conn->query($sql);
         ?>
         <div class="row">
