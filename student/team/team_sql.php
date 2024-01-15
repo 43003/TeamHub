@@ -15,13 +15,14 @@ if($pro=='CHANGE'){
     $team=isset($_REQUEST["team"])?$_REQUEST["team"]:"";
     $team_id=isset($_REQUEST["team_id"])?$_REQUEST["team_id"]:"";
     try {
-
+        // Team Lama
         $conn->execute("UPDATE `team` SET number_of_student=number_of_student-1 WHERE team_ID=".tosql($team));
+        $conn->execute("INSERT INTO `history`(`student_ID`, `team_ID`) VALUES (".tosql($_SESSION['SESS_UID']).",".tosql($team).")");
 
+        // Team Baru
         $conn->execute("UPDATE `team` SET number_of_student=number_of_student+1 WHERE team_ID=".tosql($team_id));
+        $conn->execute("UPDATE `student_course` SET `team_ID`=".tosql($team_id)." WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($_SESSION['SESS_UID']));
 
-        $sql="UPDATE `student_course` SET `team_ID`=".tosql($team_id)." WHERE `student_ID`=".tosql($_SESSION['SESS_UID']);
-        $conn->execute($sql);
 		$err='OK';
     } catch (\Throwable $th) {
         //throw $th;

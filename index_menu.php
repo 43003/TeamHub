@@ -51,6 +51,7 @@
                             <span class="nav-link-text ms-2 ps-1">Teams</span>
                         </a>
                     </li>
+                    <?php if($_SESSION['SESS_TYPE']=='S') { ?>
                     <li class="nav-item mt-3">
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">REPORT</h6>
                     </li>
@@ -61,6 +62,7 @@
                             <span class="nav-link-text ms-2 ps-1">Reports</span>
                         </a>
                     </li>
+                    <?php } ?>
                     <li class="nav-item">
                         <hr class="horizontal light" />
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">SETTINGS</h6>

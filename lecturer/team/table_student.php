@@ -145,9 +145,10 @@
                   <div class="col-6 d-flex align-items-center">
                     <h6 class="mb-0">
                       List of Student 
-                      [<?=dlookup("course","course_code"," course_ID=".tosql($cid))?> - <?=dlookup("course","course_name"," course_ID=".tosql($cid))?>]
+                      [<?=dlookup("`course`","`course_code`"," `course_ID`=".tosql($cid))?> - <?=dlookup("course","course_name"," course_ID=".tosql($cid))?>]
                     </h6>
                   </div>
+                  <?php if (dlookup_cnt("`student_course`","*","`course_ID`=".tosql($cid)." AND `status` != '9' AND `team_ID` IS NULL") > 0) { ?>
                   <div class="col-6 text-end">
                     <a class="btn bg-gradient-dark mb-0" href="javascript:;" onclick="do_create('<?=$cid?>')">
                       <i class="material-icons text-sm">add</i>&nbsp;&nbsp;Create Team
@@ -156,6 +157,7 @@
                       <i class="material-icons text-sm">autorenew</i>&nbsp;&nbsp;Generate Team
                     </a>
                   </div>
+                  <?php } ?>
                 </div>
               </div>
               <div class="card-body pt-4 p-3">
