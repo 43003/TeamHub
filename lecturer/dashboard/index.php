@@ -4,11 +4,18 @@
                   <div class="col">
                      <div class="card h-100">                        
                         <div class="card-body">
+                           <?php
+                              $rsp = $conn->query("SELECT * FROM lecturer WHERE lecturer_ID=".tosql($_SESSION["SESS_UID"]));
+                           ?>
                            <div class="row">
                               <div class="col-12 col-md-6 col-xl-3 position-relative">
                                  <div class="card card-plain">
                                     <div class="card-body mx-auto">
-                                       
+                                       <div class="col-auto">
+                                          <?php if(!empty($rsp->fields['pic'])) { ?>
+                                          <img src="uploads/lecturer/<?=$rsp->fields['pic']?>" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                          <?php } ?>
+                                       </div>
                                     </div>
                                  </div>
                                  <hr class="vertical dark">
@@ -27,9 +34,6 @@
                                        </div>
                                     </div>
                                     <div class="card-body p-3">
-                                       <?php
-                                          $rsp = $conn->query("SELECT * FROM lecturer WHERE lecturer_ID=".tosql($_SESSION["SESS_UID"]));
-                                       ?>
                                        <h6 class="mb-2">Description</h6>
                                        <p class="text-sm">
                                           <?=$rsp->fields["description"];?>
