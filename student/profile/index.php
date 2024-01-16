@@ -39,7 +39,7 @@
                   <div class="card-body pt-0">
                     <div class="row mb-4">
                       <div class="col-md-2">
-                        <div class="input-group input-group-outline">
+                        <div class="input-group input-group-inline">
                           <label class="form-label">Full Name </label>
                         </div>
                       </div>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="row mb-4">
                       <div class="col-md-2">
-                        <div class="input-group input-group-outline">
+                        <div class="input-group input-group-inline">
                           <label class="form-label">Course </label>
                         </div>
                       </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="row mb-4">
                       <div class="col-md-2">
-                        <div class="input-group input-group-outline">
+                        <div class="input-group input-group-inline">
                           <label class="form-label">Class </label>
                         </div>
                       </div>

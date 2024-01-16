@@ -56,8 +56,8 @@
                         <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder text-white">REPORT</h6>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?php if($pages==$dir.'/report/index.php'){ print 'active'; }?>" 
-                            href="index.php?data=<?php print base64_encode($dir.'/report/index.php;;Reports;;;;'); ?>">
+                        <a class="nav-link <?php if($module=='Reports'){ print 'active'; }?>" 
+                            href="index.php?data=<?php print base64_encode($dir.'/report/index.php;Reports;Reports;;;;'); ?>">
                             <i class="material-icons-round">summarize</i>
                             <span class="nav-link-text ms-2 ps-1">Reports</span>
                         </a>

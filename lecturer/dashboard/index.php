@@ -128,26 +128,6 @@
                         </div>
                      </div>
                   </div>
-                  <!-- <div class="col-lg-8 col-sm-6 mt-sm-0 mt-4">
-                     <div class="card h-100">
-                        <div class="card-header p-3 pt-2">
-                           <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 me-3 float-start">
-                              <i class="material-icons opacity-10">analytics</i>
-                           </div>
-                           <div class="d-block d-md-flex">
-                              <div class="me-auto">
-                                 <h6 class="mb-0">Assessment</h6>
-                                 <p class="mb-0 text-sm">Submit / Unsubmited Assessment</p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="card-body p-3">
-                           <div class="chart">
-                              <canvas id="chart-line" class="chart-canvas" height="350"></canvas>
-                           </div>
-                        </div>
-                     </div>
-                  </div> -->
                   <script src="assets/js/plugins/chartjs.min.js"></script>
                   <script>
                   const dt_chart = new simpleDatatables.DataTable("#dt_chart", {
@@ -168,7 +148,7 @@
                   $data_student="";
                   $bills=0;
                   while (!$rsDC->EOF) {
-                     $sqlDS = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsDC->fields['course_ID']);
+                     $sqlDS = "SELECT COUNT(*) AS total_student FROM student_course WHERE course_ID=".tosql($rsDC->fields['course_ID'])." AND status!=9";
                      $rsDS = $conn->query($sqlDS);
                      
                      if($bills > 0){
@@ -205,7 +185,7 @@
                         plugins: {
                            legend: {
                               display: false,
-                           }
+                           },
                         },
                         interaction: {
                            intersect: false,

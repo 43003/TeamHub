@@ -142,6 +142,9 @@ if($pro=='STATUS'){
     
     try {
         // $conn->debug=true;
+        // Insert Student History
+        $student = $conn->query("INSERT INTO `history`(`student_ID`, `team_ID`) SELECT `student_ID`, `team_ID` FROM `student_course` WHERE `team_ID`=".tosql($team));
+
         // Disband All Member
         $conn->query("UPDATE `student_course` SET `team_ID`=NULL, `is_leader`=NULL WHERE course_id=".tosql($ids)." AND team_ID=".tosql($team));
 
