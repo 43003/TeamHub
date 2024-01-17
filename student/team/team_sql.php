@@ -30,6 +30,17 @@ if($pro=='CHANGE'){
     }
 } else if($pro=='DELETE'){
     try {
+        // Check if has team
+        $chckTeam = $conn->query("SELECT * FROM `student_course` WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($_SESSION['SESS_UID'])." AND `team_ID` IS NOT NULL");
+
+        if ($chckTeam->recordcount() > 0) {
+            // Insert into history
+            $conn->execute("INSERT INTO `history`(`student_ID`, `team_ID`) VALUES (".tosql($_SESSION['SESS_UID']).",".tosql($chckTeam->fields['team_ID']).")");
+
+            // Update team number
+            $conn->execute("UPDATE `team` SET number_of_student=number_of_student-1 WHERE team_ID=".tosql($chckTeam->fields['team_ID']));
+        }
+
         // Team Lama
         $conn->execute("UPDATE `student_course` SET `status`='9' WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($_SESSION['SESS_UID']));
 
