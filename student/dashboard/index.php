@@ -103,11 +103,10 @@
                            </div>
                         </div>
                         <div class="card-body p-3 pt-4">
-
                            <?php $noti = $conn->query("SELECT A.task_assign_ID, A.status, B.title, B.start_date, B.due_date, D.course_code, D.course_name
                            FROM `task_assign` A, `assessment` B, `student_course` C, `course` D
                            WHERE A.assessment_ID=B.assessment_ID AND A.student_course_ID=C.student_course_ID AND B.course_ID=D.course_ID
-                           AND C.student_ID=".tosql($_SESSION["SESS_UID"])) ?>
+                           AND C.student_ID=".tosql($_SESSION["SESS_UID"])." ORDER BY A.task_assign_ID LIMIT 10") ?>
 
                            <ul class="list-group list-group-flush" data-toggle="checklist">
                               <?php while (!$noti->EOF) { ?>

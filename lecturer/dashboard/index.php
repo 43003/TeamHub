@@ -53,7 +53,52 @@
                   </div>
                </div>
                <div class="row mt-6">
-                  <div class="col">
+                  <div class="col-4">
+                     <div class="card h-100">
+                        <div class="card-header p-3 pt-2">
+                           <div class="icon icon-lg icon-shape bg-gradient-info shadow text-center border-radius-xl mt-n4 float-start">
+                              <i class="material-icons opacity-10">notifications</i>
+                           </div>
+                           <div class="row">
+                              <div class="col-md-6">
+                                 <h6 class="mb-0">Notification</h6>
+                              </div>
+                              <div class="col-md-6 d-flex justify-content-end align-items-center">
+                                 <small><?=DisplayDateE(now(),"ENG")?></small>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="card-body p-3 pt-4">
+                           <?php $noti = $conn->query("SELECT C.student_name, C.student_ID, A.course_name, A.course_code
+                           FROM `course` A, `student_course` B, `student` C
+                           WHERE A.course_ID=B.course_ID AND B.student_ID=C.student_ID
+                           AND A.lecturer_ID=".tosql($_SESSION["SESS_UID"])." AND B.status='9' LIMIT 10") ?>
+
+                           <ul class="list-group list-group-flush" data-toggle="checklist">
+                              <?php while (!$noti->EOF) { ?>
+                              <li class="list-group-item border-0 flex-column align-items-start ps-0 py-0 mb-3">
+                                 <div class="checklist-item checklist-item-info ps-2 ms-3">
+                                    <div class="d-flex align-items-center">
+                                       <h6 class="mb-0 text-dark text-sm"><?=$noti->fields['course_code']?> - <?=$noti->fields['course_name']?></h6>
+                                    </div>
+                                    <div class="d-flex align-items-center mt-3 ps-1">
+                                       <div>
+                                          <p class="mb-0 text-secondary"><?=$noti->fields['student_name']?></p>
+                                          <span class="text-xs">[ <?=$noti->fields['student_ID']?> ]</span>
+                                       </div>
+                                       <div class="mx-auto">
+                                          <span class="text-xs badge bg-gradient-danger">Drop</span>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <hr class="horizontal dark mt-4 mb-0">
+                              </li>
+                              <?php $noti->movenext(); } ?>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-8">
                      <div class="card h-100">
                         <div class="card-header p-3 pt-2">
                            <div class="icon icon-lg icon-shape bg-gradient-info shadow-info text-center border-radius-xl mt-n4 me-3 float-start">
