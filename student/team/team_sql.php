@@ -28,6 +28,16 @@ if($pro=='CHANGE'){
         //throw $th;
         $err='ERR';
     }
+} else if($pro=='DELETE'){
+    try {
+        // Team Lama
+        $conn->execute("UPDATE `student_course` SET `status`='9' WHERE `course_ID`=".tosql($ids)." AND `student_ID`=".tosql($_SESSION['SESS_UID']));
+
+        $err='OK';
+    } catch (\Throwable $th) {
+        //throw $th;
+        $err='ERR';
+    }
 }
 
 header("Content-Type: text/json");
